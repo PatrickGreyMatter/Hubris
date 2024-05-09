@@ -1,0 +1,38 @@
+Utilisation d’un serveur VPS Hostinger
+
+ajout d’un CloudPanel pour gerer les bases de données et les fichiers medias affichés sur le site.
+Deux bases de données sur le site : 
+      -    preprod
+prod 
+mon projet laravel local a son .ENV connecté a la preprod.
+mon projet laravel de production hebergé sur mon vps a la racine est connecté a la prod.
+
+les deux projets laravel sont connecté a Github, celui en production effectue uniquement des pull et celui en local (developement) effectue les commits et les push.
+
+
+
+VPS {
+
+cloudpanel (in /home/hubris-storage)
+----------------------------------------
+
+panel : (admin ; 9z8sSp2rF9elEwFn?i8E)
+ssh main user : (hubris-storage ; 0463SsVkFmCLhMxWfc25)
+----------------------------------------
+
+root user vps
+
+root@109.176.199.95
+root : gjqRTkgKMc5Eg@
+----------------------------------------
+
+databases cloudpanel
+
+preprod : (username : hubrispreprod ; Ma8U95xE4HWzNBBuaiw0)
+
+prod : (username : hubrisprod ; 7BVVltcCWk9y5QZKhHRe)
+prod : (username : inviteprod ; P28BSzbG8X5a7c6tE8c2)
+
+
+}
+
