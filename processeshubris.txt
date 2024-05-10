@@ -16,8 +16,9 @@ Apache2 utilise le port 8080 car nginx utilise déja le 80 pour que cloudpanel s
 Nginx sert cloudpanel et utilise le port 80
 comme apache ne peut pas servir lui aussi le port 80, j'ai fait une redirection reverse proxy de nginx vers apache2
 
+creation des certificats ssl dans nginx pour servir le https
 
-
+ajout d'un bare repository sur mon vps pour recevoir les hook github /var/repo/hooks/post-receive et ajout de directives et de commandes au fichier
 
 
 
@@ -39,6 +40,8 @@ root user vps
 
 root@109.176.199.95
 root : gjqRTkgKMc5Eg@
+
+user1 : HDBhdabcID@D31
 ----------------------------------------
 
 databases cloudpanel
