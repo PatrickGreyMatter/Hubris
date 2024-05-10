@@ -9,6 +9,21 @@ mon projet laravel de production hebergé sur mon vps a la racine est connecté 
 
 les deux projets laravel sont connecté a Github, celui en production effectue uniquement des pull et celui en local (developement) effectue les commits et les push.
 
+Sur mon environnement vps, je modifie le fichier /etc/apache2/sites-available/hubris-streaming.conf 
+pour qu'il serve le nom de domaine de mon site web, et je reference la racine du site web sur le public de mon projet cloné depuis github dans /var/www/html/Hubris
+
+Apache2 utilise le port 8080 car nginx utilise déja le 80 pour que cloudpanel serve phpmyadmin
+Nginx sert cloudpanel et utilise le port 80
+comme apache ne peut pas servir lui aussi le port 80, j'ai fait une redirection reverse proxy de nginx vers apache2
+
+
+
+
+
+
+
+
+
 
 
 VPS {
