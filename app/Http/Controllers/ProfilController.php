@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tag;
+use App\Models\Director;
 
 class ProfilController extends Controller
 {
@@ -23,6 +25,8 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        return view('profil');
+        $tags = Tag::all();
+        $directors = Director::all();
+        return view('profil', compact('tags', 'directors'));
     }
 }

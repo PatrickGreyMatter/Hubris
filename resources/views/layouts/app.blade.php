@@ -13,8 +13,23 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
+    <!-- Styles -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <style>
+        .form-check {
+            display: flex;
+            align-items: center;
+        }
+        .form-check-label {
+            margin-left: 0.5rem;
+        }
+
+        /* Optional: Custom CSS to prevent text cursor on non-text elements */
+        .card-header, .card-body, .form-check-label {
+            user-select: none;
+            cursor: default;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -30,7 +45,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <!-- Add your left side navbar items here -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,33 +87,21 @@
             </div>
         </nav>
 
-<main class="py-4">
-            @if (Request::is('login') || Request::is('register'))
-                <!-- Carousel -->
-                <div id="filmCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('images/forrest-gump.jpg') }}" class="d-block w-100" alt="Forrest Gump">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('images/forrest-gump.jpg') }}" class="d-block w-100" alt="Forrest Gump">
-                        </div>
-                        <!-- Add more carousel items as needed -->
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#filmCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#filmCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <!-- End Carousel -->
-            @endif
-
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJX5BSx0PL7lpE6q2JjVXpQGH6MP6PP0lA1RQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl8A24j8B0RO8k0G4jUjFcAFokQopk95pLtb5nIQdVCAeXu4lCO3kIFwBQT" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyl2ik8v+0eReMJg5aOsZtC2FW2x5j5v5MMJsmXR0MEhLG7xvl13lN4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.selectpicker').selectpicker();
+        });
+    </script>
 </body>
 </html>
