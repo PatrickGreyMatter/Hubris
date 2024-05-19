@@ -1,0 +1,9 @@
+/vendor
+/node_modules
+.env
+.idea
+.vscode
+/storage/*.key
+/storage/framework/cache/data
+/storage/logs
+processeshubris.txt
