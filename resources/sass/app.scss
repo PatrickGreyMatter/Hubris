@@ -59,15 +59,23 @@ a.btn-outline-dark {
 .dropdown-menu {
     left: 50% !important; /* Center align with button */
     transform: translateX(-50%) !important; /* Center align with button */
-    top: 100%; /* Ensure the dropdown appears below the button */
-    margin-top: 5px; /* Adjust spacing from the button */
+    margin-top: 5px; /* Add spacing from the button */
+    width: auto !important; /* Set the width to auto */
+    min-width: 0; /* Remove minimum width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    background: transparent !important; /* Make background transparent */
+    border: none !important; /* Remove border */
+    padding: 0 !important; /* Remove padding */
 }
 
-/* Add margin at the top of each dropdown item */
+/* Align dropdown item text to the right */
 .dropdown-item {
+    display: flex;
+    justify-content: flex-end; /* Align text to the right */
     margin-top: 10px !important; /* Adjust the value as needed */
-    border-width: 2px !important;
-    border-color: black !important;
+    border-width: 0 !important; /* Remove border for items */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 5px 30px 5px 0 !important; /* Adjust padding for alignment */
 }
 
 /* Custom focus state for input fields */
@@ -76,4 +84,37 @@ a.btn-outline-dark {
     border-width: 2px !important; /* Ensure border width is consistent */
     outline: none !important; /* Remove the default blue outline */
     box-shadow: none !important; /* Remove the default blue shadow */
+}
+
+/* Remove text input cursor */
+.dropdown-item:focus, .dropdown-item:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+.form-check-label {
+    margin-left: 0.5rem;
+}
+
+/* Optional: Custom CSS to prevent text cursor on non-text elements */
+.card-header, .card-body, .form-check-label {
+    user-select: none;
+    cursor: default;
+}
+
+/* Remove the input cursor from the dropdown */
+#navbarDropdown {
+    pointer-events: auto; /* Enable pointer events */
+    cursor: pointer; /* Change cursor to pointer */
+    user-select: none; /* Prevent text selection */
+}
+
+/* Remove the dropdown caret (triangle) */
+#navbarDropdown::after {
+    display: none;
 }
