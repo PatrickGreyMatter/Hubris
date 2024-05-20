@@ -1,8 +1,79 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.bunny.net/css?family=Abhaya Libre');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Utility class for 0.5px black outline
+.outline-black {
+    outline: 2px solid black !important;
+}
+
+/* Custom CSS to remove rounded corners from all elements */
+.card, .card-header, .card-body, .btn, .form-control, .navbar, .dropdown-menu, .dropdown-item, .dropdown-toggle {
+    border-radius: 0 !important;
+    border-width: 2px !important; /* Increase border width */
+}
+
+/* Ensure all elements have sharp borders */
+a.btn-outline-dark {
+    border-radius: 0 !important;
+    border-width: 2px !important; /* Increase border width */
+}
+
+/* Ensure the navbar and other elements are sharp */
+.navbar-toggler {
+    border-radius: 0 !important;
+    border-width: 2px !important; /* Increase border width */
+}
+
+/* Auto hover for important visual buttons */
+@keyframes buttonHoverAnimation {
+    0%, 100% {
+        background-color: transparent;
+        color: black;
+        border-color: black;
+        border-width: 2px !important; /* Ensure border width in animation */
+    }
+    50% {
+        background-color: black;
+        color: white;
+        border-color: black;
+        border-width: 2px !important; /* Ensure border width in animation */
+    }
+}
+
+.auto-hover {
+    animation: buttonHoverAnimation 1.5s infinite;
+}
+
+/* Custom CSS to ensure dropdown menus and items have sharp borders */
+.dropdown-menu, .dropdown-item, .dropdown-toggle {
+    border-radius: 0 !important;
+}
+
+/* Align dropdown items with the name box */
+.dropdown-menu {
+    left: 50% !important; /* Center align with button */
+    transform: translateX(-50%) !important; /* Center align with button */
+    top: 100%; /* Ensure the dropdown appears below the button */
+    margin-top: 5px; /* Adjust spacing from the button */
+}
+
+/* Add margin at the top of each dropdown item */
+.dropdown-item {
+    margin-top: 10px !important; /* Adjust the value as needed */
+    border-width: 2px !important;
+    border-color: black !important;
+}
+
+/* Custom focus state for input fields */
+.form-control:focus {
+    border-color: black !important;
+    border-width: 2px !important; /* Ensure border width is consistent */
+    outline: none !important; /* Remove the default blue outline */
+    box-shadow: none !important; /* Remove the default blue shadow */
+}
