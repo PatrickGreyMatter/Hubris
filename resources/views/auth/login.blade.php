@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card outline-black">
                 <div class="card-header">{{ __("Se connecter") }}</div>
 
-                <div class="card-body outline-black">
+                <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -45,7 +45,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Se souvenir de moi') }}
                                     </label>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-outline-dark border-0 rounded-0">
-                                    {{ __('Login') }}
+                                    {{ __('Se connecter') }}
                                 </button>
                                 <button type="button" class="btn btn-outline-dark border-0 rounded-0" onclick="window.location.href='{{ route('register') }}'">
                                     {{ __("S'inscrire") }}

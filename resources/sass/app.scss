@@ -7,27 +7,54 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+body {
+    background-image: url('/presentations/website_layout/default_background1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+main {
+    flex-grow: 1;
+}
+
 // Utility class for 0.5px black outline
 .outline-black {
     outline: 2px solid black !important;
 }
 
 /* Custom CSS to remove rounded corners from all elements */
-.card, .card-header, .card-body, .btn, .form-control, .navbar, .dropdown-menu, .dropdown-item, .dropdown-toggle {
+.btn, .form-control, .navbar, .dropdown-menu, .dropdown-item, .dropdown-toggle {
     border-radius: 0 !important;
     border-width: 2px !important; /* Increase border width */
 }
-
+.card, .card-header, .card-body {
+    border-radius: 0 !important;
+    border-width: 2px !important; /* Increase border width */
+    border-color: transparent !important; /* Remove default grey outline */
+}
 /* Ensure all elements have sharp borders */
 a.btn-outline-dark {
     border-radius: 0 !important;
     border-width: 2px !important; /* Increase border width */
+    border-color: transparent !important; /* Remove default grey outline */
 }
 
 /* Ensure the navbar and other elements are sharp */
 .navbar-toggler {
     border-radius: 0 !important;
     border-width: 2px !important; /* Increase border width */
+    border-color: transparent !important; /* Remove default grey outline */
 }
 
 /* Auto hover for important visual buttons */
@@ -53,6 +80,7 @@ a.btn-outline-dark {
 /* Custom CSS to ensure dropdown menus and items have sharp borders */
 .dropdown-menu, .dropdown-item, .dropdown-toggle {
     border-radius: 0 !important;
+    border-color: transparent !important; /* Remove default grey outline */
 }
 
 /* Align dropdown items with the name box */
@@ -92,11 +120,11 @@ a.btn-outline-dark {
     box-shadow: none !important;
 }
 
-
 .form-check {
     display: flex;
     align-items: center;
 }
+
 .form-check-label {
     margin-left: 0.5rem;
 }
