@@ -73,41 +73,21 @@
                                     {{ Auth::user()->name }}
                                 </a>
                             </li>
-                            
-                            
+                            <li class="outline-black">
+                                <a class="btn btn-outline-dark border-0 rounded-0" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
-        @if(Route::is('login') || Route::is('register'))
-        <div class="wrapper">
-          <!-- Loop through the films, chunked by 5 items per section to create multiple sections if needed -->
-          @foreach($films->chunk(5) as $index => $chunk)
-          <section id="section{{ $index + 1 }}">
-              <!-- Navigation arrows -->
-              <a href="#section{{ $index == 0 ? $films->chunk(5)->count() : $index }}" class="arrow__btn">‹</a>
-              @foreach($chunk as $film)
-              <div class="item">
-                  <!-- Link to the film's detailed page using the film's slug -->
-                  <a href="{{ url('medias/' . $film->slug) }}">
-                      <!-- Display the film's thumbnail -->
-                      <img src="{{ $film->thumbnail }}" alt="{{ $film->title }}">
-                      <!-- Film information -->
-                      <div class="info">
-                          <h3>{{ $film->title }}</h3>
-                          <p>{{ $film->length }} mins | {{ $film->year }}</p>
-                      </div>
-                  </a>
-              </div>
-              @endforeach
-              <!-- Navigation arrows -->
-              <a href="#section{{ $index == $films->chunk(5)->count() - 1 ? 1 : $index + 2 }}" class="arrow__btn">›</a>
-          </section>
-          @endforeach
-      </div>
-        @endif
 
         <main class="py-4">
             @yield('content')
