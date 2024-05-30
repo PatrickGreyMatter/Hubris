@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Preload the background image -->
+    <link rel="preload" href="/presentations/website_layout/default_background1.jpg" as="image">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Hubris-streaming') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -16,27 +19,28 @@
     <!-- Styles -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
-        .form-check {
+        body {
+            background: #0a0b5b56; /* Use a light grey color or similar to your image */
+            min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            transition: background 0.3s ease-in-out; /* Smooth transition for the background */
         }
-        .form-check-label {
-            margin-left: 0.5rem;
-        }
-
-        /* Optional: Custom CSS to prevent text cursor on non-text elements */
-        .card-header, .card-body, .form-check-label {
-            user-select: none;
-            cursor: default;
+        body.loaded {
+            background-image: url('/presentations/website_layout/default_background1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm background=#FF2D20">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Hubris-streaming') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -64,28 +68,46 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown outline-black">
+                            <li class="outline-black">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="btn btn-outline-dark border-0 rounded-0" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
+                            
+                            
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
+
+        @if(Route::is('login') || Route::is('register'))
+        <div class="wrapper">
+          <!-- Loop through the films, chunked by 5 items per section to create multiple sections if needed -->
+          @foreach($films->chunk(5) as $index => $chunk)
+          <section id="section{{ $index + 1 }}">
+              <!-- Navigation arrows -->
+              <a href="#section{{ $index == 0 ? $films->chunk(5)->count() : $index }}" class="arrow__btn">‹</a>
+              @foreach($chunk as $film)
+              <div class="item">
+                  <!-- Link to the film's detailed page using the film's slug -->
+                  <a href="{{ url('medias/' . $film->slug) }}">
+                      <!-- Display the film's thumbnail -->
+                      <img src="{{ $film->thumbnail }}" alt="{{ $film->title }}">
+                      <!-- Film information -->
+                      <div class="info">
+                          <h3>{{ $film->title }}</h3>
+                          <p>{{ $film->length }} mins | {{ $film->year }}</p>
+                      </div>
+                  </a>
+              </div>
+              @endforeach
+              <!-- Navigation arrows -->
+              <a href="#section{{ $index == $films->chunk(5)->count() - 1 ? 1 : $index + 2 }}" class="arrow__btn">›</a>
+          </section>
+          @endforeach
+      </div>
+        @endif
 
         <main class="py-4">
             @yield('content')
@@ -97,6 +119,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl8A24j8B0RO8k0G4jUjFcAFokQopk95pLtb5nIQdVCAeXu4lCO3kIFwBQT" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyl2ik8v+0eReMJg5aOsZtC2FW2x5j5v5MMJsmXR0MEhLG7xvl13lN4" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var img = new Image();
+            img.src = "/presentations/website_layout/default_background1.jpg";
+            img.onload = function() {
+                document.body.classList.add('loaded');
+            }
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

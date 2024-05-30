@@ -7,16 +7,7 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-body {
-    background-image: url('/presentations/website_layout/default_background1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
+
 
 #app {
     display: flex;
@@ -80,7 +71,7 @@ a.btn-outline-dark {
 /* Custom CSS to ensure dropdown menus and items have sharp borders */
 .dropdown-menu, .dropdown-item, .dropdown-toggle {
     border-radius: 0 !important;
-    border-color: transparent !important; /* Remove default grey outline */
+    /*border-color: transparent !important; /* Remove default grey outline */
 }
 
 /* Align dropdown items with the name box */
@@ -146,3 +137,56 @@ a.btn-outline-dark {
 #navbarDropdown::after {
     display: none;
 }
+
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3,100%);
+    overflow:hidden;
+    scroll-behavior: smooth;
+  
+    section {
+      width: 100%;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      margin: 20px 0;
+      
+      .item {
+        position: relative;
+        padding: 0 2px;
+  
+  
+        .heading {
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          color: #fff;
+        }
+        
+      }
+  
+      .arrow__btn {
+        position: absolute;
+        color: #fff;
+        text-decoration: none;
+        font-size: 6em;
+        background:rgb(0,0,0);
+        width: 80px;
+        padding: 20px;
+        text-align: center;
+        z-index: 1;
+      }
+  
+      .left-arrow {
+        top:0; bottom:0; left:0;
+        background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
+      
+      .right-arrow {
+        top:0; bottom:0; right: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+      }
+  
+    }
+  }
