@@ -31,7 +31,7 @@ class MediaController extends Controller
 
             try {
                 $thumbnail = $request->file('thumbnail');
-                $thumbnailName = time() . '_submission.' . $thumbnail->getClientOriginalExtension();
+                $thumbnailName = time() . '.' . $thumbnail->getClientOriginalExtension();
                 $resizedThumbnail = Image::make($thumbnail)->resize(300, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -40,7 +40,7 @@ class MediaController extends Controller
                 Log::info('Thumbnail saved');
 
                 $video = $request->file('video_url');
-                $videoName = time() . '_submission.' . $video->getClientOriginalExtension();
+                $videoName = time() . '.' . $video->getClientOriginalExtension();
                 $video->move(public_path('presentations/medias'), $videoName);
                 Log::info('Video saved');
 
