@@ -3,66 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Models\Director;
-use App\Models\Media;
+use App\Models\FilmSubmission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
     public function store(Request $request)
     {
-        // Log the request method and data
-    
+        Log::info('Store method called');
+        
         if ($request->isMethod('post')) {
-    
-            $request->validate([
+            Log::info('POST method detected');
+            
+            $validated = $request->validate([
                 'title' => 'required',
                 'description' => 'required',
                 'tags' => 'required|array',
                 'length' => 'required',
                 'year' => 'required',
-                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 2MB for thumbnail
-                'video_url' => 'required|mimes:mp4,mov,ogg,qt|max:2097152' // 2GB for video
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'video_url' => 'required|mimes:mp4,mov,ogg,qt|max:2097152'
             ]);
-    
-            $thumbnail = $request->file('thumbnail');
-            $thumbnailName = time() . '.' . $thumbnail->getClientOriginalExtension();
-            
-            // Resize the thumbnail to a fixed resolution, e.g., 300x300
-            $resizedThumbnail = Image::make($thumbnail)->resize(300, 300, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-    
-            $resizedThumbnail->save(public_path('presentations/images/' . $thumbnailName));
-    
-            $video = $request->file('video_url');
-            $videoName = time() . '.' . $video->getClientOriginalExtension();
-            $video->move(public_path('presentations/medias'), $videoName);
-    
-            $director = $request->director_id;
-            if ($request->new_director) {
-                $newDirector = Director::create(['name' => $request->new_director]);
-                $director = $newDirector->id;
+
+            Log::info('Validation passed');
+
+            try {
+                $thumbnail = $request->file('thumbnail');
+                $thumbnailName = time() . '_submission.' . $thumbnail->getClientOriginalExtension();
+                $resizedThumbnail = Image::make($thumbnail)->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $resizedThumbnail->save(public_path('presentations/images/' . $thumbnailName));
+                Log::info('Thumbnail saved');
+
+                $video = $request->file('video_url');
+                $videoName = time() . '_submission.' . $video->getClientOriginalExtension();
+                $video->move(public_path('presentations/medias'), $videoName);
+                Log::info('Video saved');
+
+                $director = $request->director_id;
+                if ($request->new_director) {
+                    $existingDirector = Director::where('name', $request->new_director)->first();
+                    if ($existingDirector) {
+                        $director = $existingDirector->id;
+                    } else {
+                        $newDirector = Director::create(['name' => $request->new_director]);
+                        $director = $newDirector->id;
+                    }
+                    Log::info('Director processed');
+                }
+
+                FilmSubmission::create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'tags' => json_encode($request->tags),
+                    'length' => $request->length,
+                    'year' => $request->year,
+                    'thumbnail' => 'presentations/images/' . $thumbnailName,
+                    'video_url' => 'presentations/medias/' . $videoName,
+                    'status' => 'pending',
+                    'user_id' => auth()->id(),
+                    'director_id' => $director,
+                ]);
+
+                Log::info('Film submission created');
+                return redirect()->route('profil')->with('success', 'Film submitted successfully for review.');
+            } catch (\Exception $e) {
+                Log::error('Error during film submission: ' . $e->getMessage());
+                return redirect()->route('profil')->with('error', 'An error occurred while submitting the film.');
             }
-    
-            $media = new Media();
-            $media->title = $request->title;
-            $media->slug = Str::slug($request->title);
-            $media->description = $request->description;
-            $media->type = 'film';
-            $media->director_id = $director;
-            $media->length = $request->length;
-            $media->year = $request->year;
-            $media->thumbnail = 'presentations/images/' . $thumbnailName;
-            $media->video_url = 'presentations/medias/' . $videoName;
-            $media->save();
-    
-            $media->tags()->attach($request->tags);
-    
-            return redirect()->route('profil')->with('success', 'Film added successfully.');
         } else {
             return response('Method not allowed', 405);
         }

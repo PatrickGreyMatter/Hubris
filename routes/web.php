@@ -4,19 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\RoleRequestController;
+use App\Http\Controllers\FilmSubmissionController;
 use Illuminate\Support\Facades\Auth;
 
 // Authentication routes
-Auth::routes();
-
-// Route for the home page pointing to WelcomeController
-Route::get('/', [WelcomeController::class, 'home']);
-
-// Route for the profile page
-Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
-
-// Route for storing films (media)
-Route::post('/profil/store', [MediaController::class, 'store'])->name('films.store');
-
-
-
+Route::middleware(['web'])->group(function () {
+    Auth::routes();
+    Route::get('/', [WelcomeController::class, 'home'])->name('home');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    Route::post('/films/store', [MediaController::class, 'store'])->name('films.store');
+    Route::post('/role-request', [RoleRequestController::class, 'store'])->name('role.request');
+    Route::put('/role-approve/{id}', [RoleRequestController::class, 'approve'])->name('role.approve');
+    Route::put('/films-approve/{id}', [FilmSubmissionController::class, 'approve'])->name('films.approve');
+});
