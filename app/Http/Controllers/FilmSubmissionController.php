@@ -6,7 +6,6 @@ use App\Models\FilmSubmission;
 use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class FilmSubmissionController extends Controller
@@ -20,37 +19,14 @@ class FilmSubmissionController extends Controller
         if ($request->status == 'approved') {
             $slug = Str::slug($submission->title);
 
-            // Original paths with _submission suffix
-            $originalThumbnailPath = $submission->thumbnail;
-            $originalVideoPath = $submission->video_url;
-
-            // New paths without _submission suffix
-            $newThumbnailPath = 'presentations/images/' . $slug . '.' . pathinfo($originalThumbnailPath, PATHINFO_EXTENSION);
-            $newVideoPath = 'presentations/medias/' . $slug . '.' . pathinfo($originalVideoPath, PATHINFO_EXTENSION);
-
-            Log::info('Renaming files', [
-                'originalThumbnailPath' => $originalThumbnailPath,
-                'newThumbnailPath' => $newThumbnailPath,
-                'originalVideoPath' => $originalVideoPath,
-                'newVideoPath' => $newVideoPath
+            Log::info('Processing approved submission', [
+                'submissionId' => $submission->id,
+                'slug' => $slug,
+                'thumbnailPath' => $submission->thumbnail,
+                'videoPath' => $submission->video_url
             ]);
 
             try {
-                // Rename files to remove _submission
-                if (Storage::exists($originalThumbnailPath)) {
-                    Storage::move($originalThumbnailPath, $newThumbnailPath);
-                    Log::info('Thumbnail file renamed successfully.');
-                } else {
-                    Log::error('Original thumbnail file not found.');
-                }
-
-                if (Storage::exists($originalVideoPath)) {
-                    Storage::move($originalVideoPath, $newVideoPath);
-                    Log::info('Video file renamed successfully.');
-                } else {
-                    Log::error('Original video file not found.');
-                }
-
                 // Move the data to the Media table
                 $media = Media::create([
                     'title' => $submission->title,
@@ -60,8 +36,8 @@ class FilmSubmissionController extends Controller
                     'director_id' => $submission->director_id,
                     'length' => $submission->length,
                     'year' => $submission->year,
-                    'thumbnail' => $newThumbnailPath,
-                    'video_url' => $newVideoPath,
+                    'thumbnail' => $submission->thumbnail,
+                    'video_url' => $submission->video_url,
                 ]);
 
                 // Attach tags to the media
@@ -69,7 +45,7 @@ class FilmSubmissionController extends Controller
                 $media->tags()->attach($tags);
 
             } catch (\Exception $e) {
-                Log::error('Error during file renaming: ' . $e->getMessage());
+                Log::error('Error during media creation: ' . $e->getMessage());
                 return redirect()->back()->with('error', 'An error occurred while approving the film.');
             }
         }
