@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        ini_set('max_execution_time', env('APP_REQUEST_TIMEOUT', 3000));
+
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }
