@@ -8,6 +8,7 @@ use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FilmSubmissionController extends Controller
 {
@@ -57,6 +58,20 @@ class FilmSubmissionController extends Controller
                 Log::error('Error during media creation: ' . $e->getMessage());
                 return redirect()->back()->with('error', 'An error occurred while approving the film.');
             }
+        } elseif ($request->status == 'rejected') {
+            // Delete the thumbnail and video files
+            if (Storage::exists($submission->thumbnail)) {
+                Storage::delete($submission->thumbnail);
+            }
+
+            if (Storage::exists($submission->video_url)) {
+                Storage::delete($submission->video_url);
+            }
+
+            Log::info('Rejected submission files deleted', [
+                'thumbnailPath' => $submission->thumbnail,
+                'videoPath' => $submission->video_url
+            ]);
         }
 
         // Remove the submission record
@@ -65,5 +80,3 @@ class FilmSubmissionController extends Controller
         return redirect()->back()->with('status', 'La demande de film a été traitée.');
     }
 }
-
-
