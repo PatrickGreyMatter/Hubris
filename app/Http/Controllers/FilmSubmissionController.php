@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FilmSubmission;
+use App\Models\RoleRequest;
 use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -10,6 +11,14 @@ use Illuminate\Support\Facades\Log;
 
 class FilmSubmissionController extends Controller
 {
+    public function index()
+    {
+        $roleRequests = RoleRequest::all();
+        $filmSubmissions = FilmSubmission::with(['tags', 'director', 'user'])->get();
+
+        return view('profil', compact('roleRequests', 'filmSubmissions'));
+    }
+
     public function approve(Request $request, $id)
     {
         $submission = FilmSubmission::findOrFail($id);
@@ -41,7 +50,7 @@ class FilmSubmissionController extends Controller
                 ]);
 
                 // Attach tags to the media
-                $tags = json_decode($submission->tags);
+                $tags = $submission->tags->pluck('id')->toArray(); // Get tag IDs
                 $media->tags()->attach($tags);
 
             } catch (\Exception $e) {
@@ -56,3 +65,5 @@ class FilmSubmissionController extends Controller
         return redirect()->back()->with('status', 'La demande de film a été traitée.');
     }
 }
+
+

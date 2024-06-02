@@ -64,7 +64,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn btn-outline-dark border-0 rounded-0" data-bs-toggle="collapse" href="#addFilmForm" role="button" aria-expanded="false" aria-controls="addFilmForm">
+                    <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#addFilmForm" role="button" aria-expanded="false" aria-controls="addFilmForm">
                         {{ __('Proposez nous un film !') }}
                     </a>
                 </div>
@@ -168,43 +168,69 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    {{ __('Gérer les demandes de rôles et de films') }}
+                    <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#roleRequests" role="button" aria-expanded="false" aria-controls="roleRequests">
+                        {{ __('Demandes de changement de rôle') }}
+                    </a>
                 </div>
-                <div class="card-body">
-                    <h4>Demandes de changement de rôle</h4>
-                    <!-- Liste des demandes de rôle -->
-                    @foreach($roleRequests as $request)
-                        <div class="mb-3">
-                            <p><strong>{{ $request->user->name }}</strong> demande de devenir <strong>{{ $request->role }}</strong></p>
-                            <p>Raison : {{ $request->reason }}</p>
-                            <form method="POST" action="{{ route('role.approve', $request->id) }}">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" name="status" value="approved" class="btn btn-success">Approuver</button>
-                                <button type="submit" name="status" value="rejected" class="btn btn-danger">Rejeter</button>
-                            </form>
-                        </div>
-                    @endforeach
+                <div class="collapse" id="roleRequests">
+                    <div class="card-body">
+                        @foreach($roleRequests as $request)
+                            <div class="mb-3">
+                                <p><strong>{{ $request->user->name }}</strong> demande de devenir <strong>{{ $request->role }}</strong></p>
+                                <p>Raison : {{ $request->reason }}</p>
+                                <form method="POST" action="{{ route('role.approve', $request->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" name="status" value="approved" class="btn btn-success">Approuver</button>
+                                    <button type="submit" name="status" value="rejected" class="btn btn-danger">Rejeter</button>
+                                </form>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
-                    <h4>Demandes d'ajout de films</h4>
-                    <!-- Liste des propositions de films -->
-                    @foreach($filmSubmissions as $submission)
-                        <div class="mb-3">
-                            <p><strong>{{ $submission->title }}</strong> par <strong>{{ $submission->user->name }}</strong></p>
-                            <p>Description : {{ $submission->description }}</p>
-                            <form method="POST" action="{{ route('films.approve', $submission->id) }}">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" name="status" value="approved" class="btn btn-success">Approuver</button>
-                                <button type="submit" name="status" value="rejected" class="btn btn-danger">Rejeter</button>
-                            </form>
-                        </div>
-                    @endforeach
+            <div class="card mt-4">
+                <div class="card-header">
+                    <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#filmRequests" role="button" aria-expanded="false" aria-controls="filmRequests">
+                        {{ __('Demandes d\'ajout de films') }}
+                    </a>
+                </div>
+                <div class="collapse" id="filmRequests">
+                    <div class="card-body">
+                        @foreach($filmSubmissions as $submission)
+                            <div class="mb-3">
+                                <h4><strong>{{ $submission->title }}</strong> par <strong>{{ $submission->user->name }}</strong></h4>
+                                <p><strong>Description :</strong> {{ $submission->description }}</p>
+                                <p><strong>Tags :</strong>
+                                    @if ($submission->tags)
+                                        @foreach ($submission->tags as $tag)
+                                            {{ $tag->name }}@if (!$loop->last), @endif
+                                        @endforeach
+                                    @else
+                                        {{ __('No tags available') }}
+                                    @endif
+                                </p>
+                                <p><strong>Réalisateur :</strong> {{ $submission->director->name }}</p>
+                                <p><strong>Durée :</strong> {{ $submission->length }}</p>
+                                <p><strong>Année de sortie :</strong> {{ $submission->year }}</p>
+                                <p><strong>Affiche :</strong><br> <img src="{{ asset($submission->thumbnail) }}" alt="{{ $submission->title }}" style="max-width: 100px;"></p>
+                                <p><strong>Vidéo :</strong> <a href="{{ asset($submission->video_url) }}" target="_blank">{{ __('Voir la vidéo') }}</a></p>
+                                <form method="POST" action="{{ route('films.approve', $submission->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" name="status" value="approved" class="btn btn-success">Approuver</button>
+                                    <button type="submit" name="status" value="rejected" class="btn btn-danger">Rejeter</button>
+                                </form>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    @endif
+@endif
+
 </div>
 
 <script>
@@ -213,5 +239,37 @@
         var directorSelect = document.getElementById('director');
         directorSelect.disabled = newDirectorInput.value.length > 0;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var collapses = document.querySelectorAll('.collapse');
+        collapses.forEach(function(collapse) {
+            collapse.addEventListener('show.bs.collapse', function() {
+                collapses.forEach(function(otherCollapse) {
+                    if (otherCollapse !== collapse) {
+                        var bsCollapse = bootstrap.Collapse.getInstance(otherCollapse);
+                        if (bsCollapse) {
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Re-collapse functionality
+        document.querySelectorAll('[data-toggle="collapse"]').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                var target = document.querySelector(button.getAttribute('href'));
+                if (target.classList.contains('show')) {
+                    var bsCollapse = bootstrap.Collapse.getInstance(target);
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    }
+                } else {
+                    var bsCollapse = new bootstrap.Collapse(target);
+                    bsCollapse.show();
+                }
+            });
+        });
+    });
 </script>
 @endsection

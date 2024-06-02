@@ -12,11 +12,16 @@ class MediaController extends Controller
 {
     public function store(Request $request)
     {
+        // Check if user has a pending film submission
+        if (FilmSubmission::where('user_id', auth()->id())->where('status', 'pending')->exists()) {
+            return redirect()->back()->with('status', 'Vous avez atteint la limite de propositions de films en attente.');
+        }
+
         Log::info('Store method called');
-        
+
         if ($request->isMethod('post')) {
             Log::info('POST method detected');
-            
+
             $validated = $request->validate([
                 'title' => 'required',
                 'description' => 'required',
@@ -56,10 +61,9 @@ class MediaController extends Controller
                     Log::info('Director processed');
                 }
 
-                FilmSubmission::create([
+                $filmSubmission = FilmSubmission::create([
                     'title' => $request->title,
                     'description' => $request->description,
-                    'tags' => json_encode($request->tags),
                     'length' => $request->length,
                     'year' => $request->year,
                     'thumbnail' => 'presentations/images/' . $thumbnailName,
@@ -68,6 +72,8 @@ class MediaController extends Controller
                     'user_id' => auth()->id(),
                     'director_id' => $director,
                 ]);
+
+                $filmSubmission->tags()->attach($request->tags);
 
                 Log::info('Film submission created');
                 return redirect()->route('profil')->with('success', 'Film submitted successfully for review.');
@@ -80,3 +86,4 @@ class MediaController extends Controller
         }
     }
 }
+

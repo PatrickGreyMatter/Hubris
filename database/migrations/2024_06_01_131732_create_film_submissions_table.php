@@ -17,7 +17,6 @@ class CreateFilmSubmissionsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->json('tags')->nullable(); // Assuming tags are stored as JSON
             $table->string('length', 5); // HH:MM format
             $table->year('year');
             $table->string('thumbnail');

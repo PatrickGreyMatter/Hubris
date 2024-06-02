@@ -20,7 +20,7 @@ class RoleRequestController extends Controller
             ->count();
 
         if ($pendingRequestsCount >= $this->maxRequests) {
-            return redirect()->back()->with('status', 'Vous avez atteint la limite de demandes en attente.');
+            return redirect()->back()->with('status', 'Vous avez atteint la limite de demandes de changement de rôles en attente.');
         }
 
         $request->validate([

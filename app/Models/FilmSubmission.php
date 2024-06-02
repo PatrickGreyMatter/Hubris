@@ -10,17 +10,23 @@ class FilmSubmission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'tags', 'length', 'year', 'thumbnail', 'video_url', 'status', 'user_id', 'director_id'
+        'title', 'description', 'length', 'year', 'thumbnail', 'video_url', 'status', 'user_id', 'director_id'
     ];
 
-    public function user()
+    public function tags()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Tag::class, 'film_submission_tag', 'film_submission_id', 'tag_id');
     }
 
     public function director()
     {
         return $this->belongsTo(Director::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+
 

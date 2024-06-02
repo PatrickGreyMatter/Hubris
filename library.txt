@@ -1,3 +1,8 @@
+tag obligatoires : aussi j'ai remarqué une autre chose un utilisateur avec le bon rôle peut cliquer sur proposer un film même s'il n'a pas mis de tags, mais il ne reçoit pas d'erreur, il est just renvoyer a la page profil et rien ne se passe, il faudrait mettre une alerte en place ou rendre le remplissage d'au moins un tag obligatoire
+
+
+
+
 Horror
 
 Nosferatu (1922) - Silent horror classic.
