@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\FilmSubmission;
 use App\Models\RoleRequest;
 use App\Models\Media;
+use App\Models\Tag;
+use App\Models\Director;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,8 +18,10 @@ class FilmSubmissionController extends Controller
     {
         $roleRequests = RoleRequest::all();
         $filmSubmissions = FilmSubmission::with(['tags', 'director', 'user'])->get();
+        $tags = Tag::all();
+        $directors = Director::all();
 
-        return view('profil', compact('roleRequests', 'filmSubmissions'));
+        return view('profil', compact('roleRequests', 'filmSubmissions', 'tags', 'directors'));
     }
 
     public function approve(Request $request, $id)
@@ -37,6 +41,13 @@ class FilmSubmissionController extends Controller
             ]);
 
             try {
+                // Si un nouveau réalisateur est fourni, le créer
+                if ($submission->new_director) {
+                    $director = Director::create(['name' => $submission->new_director]);
+                    $submission->director_id = $director->id;
+                    $submission->save();
+                }
+
                 // Move the data to the Media table
                 $media = Media::create([
                     'title' => $submission->title,
@@ -78,5 +89,32 @@ class FilmSubmissionController extends Controller
         $submission->delete();
 
         return redirect()->back()->with('status', 'La demande de film a été traitée.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $submission = FilmSubmission::findOrFail($id);
+        
+        $validated = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'tags' => 'required|array',
+            'length' => 'required',
+            'year' => 'required|digits:4',
+            'director_id' => 'nullable|exists:directors,id',
+            'new_director' => 'nullable|string',
+        ]);
+
+        // Mettre à jour les informations de la soumission
+        $submission->title = $validated['title'];
+        $submission->description = $validated['description'];
+        $submission->length = $validated['length'];
+        $submission->year = $validated['year'];
+        $submission->director_id = $validated['director_id'];
+        $submission->new_director = $validated['new_director'];
+        $submission->tags()->sync($validated['tags']);
+        $submission->save();
+
+        return redirect()->route('profil')->with('success', 'Film submission updated successfully.');
     }
 }

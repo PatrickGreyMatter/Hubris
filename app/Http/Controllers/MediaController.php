@@ -27,7 +27,7 @@ class MediaController extends Controller
                 'description' => 'required',
                 'tags' => 'required|array',
                 'length' => 'required',
-                'year' => 'required',
+                'year' => 'required|digits:4',
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'video_url' => 'required|mimes:mp4,mov,ogg,qt|max:2097152'
             ]);
@@ -35,8 +35,12 @@ class MediaController extends Controller
             Log::info('Validation passed');
 
             try {
+                // Clean the title and add the year to create a safe filename
+                $cleanTitle = preg_replace('/[^A-Za-z0-9]/', '', strtolower($request->title));
+                $cleanTitleWithYear = $cleanTitle . $request->year;
+
                 $thumbnail = $request->file('thumbnail');
-                $thumbnailName = time() . '.' . $thumbnail->getClientOriginalExtension();
+                $thumbnailName = $cleanTitleWithYear . '.' . $thumbnail->getClientOriginalExtension();
                 $resizedThumbnail = Image::make($thumbnail)->resize(300, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -45,20 +49,17 @@ class MediaController extends Controller
                 Log::info('Thumbnail saved');
 
                 $video = $request->file('video_url');
-                $videoName = time() . '.' . $video->getClientOriginalExtension();
+                $videoName = $cleanTitleWithYear . '.' . $video->getClientOriginalExtension();
                 $video->move(public_path('presentations/medias'), $videoName);
                 Log::info('Video saved');
 
-                $director = $request->director_id;
+                $director = null;
                 if ($request->new_director) {
-                    $existingDirector = Director::where('name', $request->new_director)->first();
-                    if ($existingDirector) {
-                        $director = $existingDirector->id;
-                    } else {
-                        $newDirector = Director::create(['name' => $request->new_director]);
-                        $director = $newDirector->id;
-                    }
-                    Log::info('Director processed');
+                    // Store new director name in new_director column
+                    $newDirector = $request->new_director;
+                } else {
+                    $director = $request->director_id;
+                    $newDirector = null;
                 }
 
                 $filmSubmission = FilmSubmission::create([
@@ -71,6 +72,7 @@ class MediaController extends Controller
                     'status' => 'pending',
                     'user_id' => auth()->id(),
                     'director_id' => $director,
+                    'new_director' => $newDirector,
                 ]);
 
                 $filmSubmission->tags()->attach($request->tags);
@@ -86,4 +88,3 @@ class MediaController extends Controller
         }
     }
 }
-

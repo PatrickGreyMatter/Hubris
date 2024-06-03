@@ -17,4 +17,5 @@ Route::middleware(['web'])->group(function () {
     Route::post('/role-request', [RoleRequestController::class, 'store'])->name('role.request');
     Route::put('/role-approve/{id}', [RoleRequestController::class, 'approve'])->name('role.approve');
     Route::put('/films-approve/{id}', [FilmSubmissionController::class, 'approve'])->name('films.approve');
+    Route::put('/films/{id}/update', [FilmSubmissionController::class, 'update'])->name('films.update');
 });

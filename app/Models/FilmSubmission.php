@@ -10,7 +10,7 @@ class FilmSubmission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'length', 'year', 'thumbnail', 'video_url', 'status', 'user_id', 'director_id'
+        'title', 'description', 'length', 'year', 'thumbnail', 'video_url', 'status', 'user_id', 'director_id', 'new_director'
     ];
 
     public function tags()
