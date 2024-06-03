@@ -122,9 +122,9 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="length" class="col-md-4 col-form-label text-md-end">{{ __('Durée (HH:MM)') }}</label>
+                                <label for="length" class="col-md-4 col-form-label text-md-end">{{ __('Durée (HHhMM)') }}</label>
                                 <div class="col-md-6">
-                                    <input id="length" type="text" class="form-control" name="length" required pattern="\d{2}:\d{2}" placeholder="HH:MM">
+                                    <input id="length" type="text" class="form-control" name="length" required pattern="\d{2}h\d{2}" placeholder="HHhMM">
                                 </div>
                             </div>
 
@@ -281,9 +281,9 @@
                                         </div>
                                         
                                         <div class="row mb-3">
-                                            <label for="length" class="col-md-4 col-form-label text-md-end">{{ __('Durée (HH:MM)') }}</label>
+                                            <label for="length" class="col-md-4 col-form-label text-md-end">{{ __('Durée (HHhMM)') }}</label>
                                             <div class="col-md-6">
-                                                <input id="length" type="text" class="form-control" name="length" value="{{ $submission->length }}" required pattern="\d{2}:\d{2}" placeholder="HH:MM">
+                                                <input id="length" type="text" class="form-control" name="length" value="{{ $submission->length }}" required pattern="\d{2}h\d{2}" placeholder="HHhMM">
                                             </div>
                                         </div>
                                         
