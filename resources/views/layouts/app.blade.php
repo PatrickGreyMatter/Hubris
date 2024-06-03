@@ -69,12 +69,9 @@
                                 </li>
                             @endif
                         @else
-                            <li class="outline-black">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                            </li>
-                            <li class="outline-black">
                                 <a class="btn btn-outline-dark border-0 rounded-0" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -83,7 +80,6 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            </li>
                         @endguest
                     </ul>
                 </div>
