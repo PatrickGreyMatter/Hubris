@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Bonjour') }} {{ Auth::user()->name }}{{ __(', bienvenu dans votre espace.') }}
+                    {{ __('Bonjour') }} {{ Auth::user()->name }}{{ __(', bienvenue dans votre espace.') }}
                 </div>
             </div>
         </div>
@@ -224,7 +224,7 @@
                                     <button type="submit" name="status" value="rejected" class="btn btn-danger">Rejeter</button>
                                 </form>
                                 
-                                <button class="btn btn-warning d-inline" onclick="toggleEditForm({{ $submission->id }})">Modifier</button>
+                                <button class="btn btn-outline-dark border-0 rounded-0 auto-hover d-inline" onclick="toggleEditForm({{ $submission->id }})">Modifier</button>
                                 
                                 <div id="editForm{{ $submission->id }}" style="display: none;">
                                     <form method="POST" action="{{ route('films.update', $submission->id) }}" enctype="multipart/form-data">
