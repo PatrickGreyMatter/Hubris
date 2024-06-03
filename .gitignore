@@ -7,3 +7,9 @@
 /storage/framework/cache/data
 /storage/logs
 processeshubris.txt
+# Ignore media files but keep the directory
+/public/presentation/medias/*
+!/public/presentation/medias/.gitkeep
+
+/public/presentation/images/*
+!/public/presentation/images/.gitkeep
