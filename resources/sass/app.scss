@@ -190,3 +190,15 @@ a.btn-outline-dark {
   
     }
   }
+
+
+  .footer .btn {
+    margin: 0 10px; /* Ajoute un espacement entre les boutons */
+    border-radius: 0; /* Boutons avec des bords carrés, si désiré */
+}
+
+.footer {
+    background-color: #343a40; /* Assurez-vous que la couleur de fond est correcte */
+    color: white; /* Texte blanc pour tous les éléments dans le footer */
+    padding: 10px 0; /* Padding vertical pour le footer */
+}
