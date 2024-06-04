@@ -51,40 +51,6 @@
         .fixed-top a:hover {
             color: #cccccc; /* Light gray on hover */
         }
-        section {
-            width: 100%;
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(5, auto);
-            margin: 20px 0;
-        }
-        .item {
-            padding: 0 2px;
-            transition: all 250ms;
-        }
-        .arrow__btn {
-            position: absolute;
-            color: #fff;
-            text-decoration: none;
-            font-size: 6em;
-            background: rgb(0, 0, 0);
-            width: 80px;
-            padding: 20px;
-            text-align: center;
-            z-index: 1;
-        }
-        .arrow__btn:nth-of-type(1) {
-            top: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-        }
-        .arrow__btn:nth-of-type(2) {
-            top: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-        }
         .info {
             text-align: center;
             color: white;
@@ -142,32 +108,11 @@
     <div class="container mt-5">
         <main class="mt-6">
             <div class="wrapper">
-                <!-- Loop through the films, chunked by 5 items per section to create multiple sections if needed -->
-                @foreach($films->chunk(5) as $index => $chunk)
-                <section id="section{{ $index + 1 }}">
-                    <!-- Navigation arrows -->
-                    <a href="#section{{ $index == 0 ? $films->chunk(5)->count() : $index }}" class="arrow__btn left-arrow">‹</a>
-                    @foreach($chunk as $film)
-                    <div class="item">
-                        <!-- Link to the film's detailed page using the film's slug -->
-                        <a href="{{ url('medias/' . $film->slug) }}">
-                            <!-- Display the film's thumbnail -->
-                            <img src="{{ $film->thumbnail }}" alt="{{ $film->title }}">
-                            <!-- Film information -->
-                            <div class="info">
-                                <h3>{{ $film->title }}</h3>
-                                <p>Durée {{ $film->length }} | {{ $film->year }}</p>
-                            </div>
-                        </a>
-                    </div>
-                    @endforeach
-                    <!-- Navigation arrows -->
-                    <a href="#section{{ $index == $films->chunk(5)->count() - 1 ? 1 : $index + 2 }}" class="arrow__btn right-arrow">›</a>
-                </section>
-                @endforeach
+                @include('partials._carousel')
             </div>
         </main>
     </div>
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -182,67 +127,56 @@
         });
     </script>
 
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
+        <div class="container">
+            <footer class="footer text-center p-2 fixed-bottom">
+                <div class="container">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a href="#" data-toggle="modal" data-target="#conditionsModal" class="nav-link">Conditions Générales d'Utilisation</a>
+                    <a href="#" data-toggle="modal" data-target="#infosModal" class="nav-link">A propos de nous</a>
+                    <a href="https://patrickgreymatter.github.io/#contact" class="nav-link" target="_blank" rel="noopener noreferrer">Contacter le créateur</a>
+                </div>
+            </footer>
+        </div>
+    </nav>
 
-
-
-
-
-
-<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
-    <div class="container">
-        <footer class="footer text-center p-2 fixed-bottom">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a href="#" data-toggle="modal" data-target="#conditionsModal" class="nav-link">Conditions Générales d'Utilisation</a>
-                <a href="#" data-toggle="modal" data-target="#infosModal" class="nav-link">A propos de nous</a>
-                <a href="https://patrickgreymatter.github.io/#contact" class="nav-link" target="_blank" rel="noopener noreferrer">Contacter le créateur</a>
-            </div>
-        </footer>
-    </div>
-</nav>
-
-
-
-
-<!-- Modal pour les Conditions Générales d'Utilisation -->
-<div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('conditions')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+    <!-- Modal pour les Conditions Générales d'Utilisation -->
+    <div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('conditions')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal pour les information d'a propos -->
-<div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('infos')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+    <!-- Modal pour les information d'a propos -->
+    <div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('infos')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
 </body>
 </html>

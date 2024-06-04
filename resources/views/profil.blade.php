@@ -176,7 +176,7 @@
                     <div class="card-body">
                         @foreach($roleRequests as $request)
                             <div class="mb-3">
-                                <p><strong>{{ $request->user->name }}</strong> demande de devenir <strong>{{ $request->role }}</strong></p>
+                                <p><strong>{{ $request->user->name }}</strong> demande le rôle : <strong>{{ $request->role }}</strong></p>
                                 <p>Raison : {{ $request->reason }}</p>
                                 <form method="POST" action="{{ route('role.approve', $request->id) }}">
                                     @csrf
