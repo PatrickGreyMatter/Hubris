@@ -39,8 +39,6 @@ Route::middleware(['auth', 'user', 'verified'])->group(function () {
 
 
 
-
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -56,3 +54,4 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+

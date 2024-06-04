@@ -181,5 +181,68 @@
             }
         });
     </script>
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
+    <div class="container">
+        <footer class="footer text-center p-2 fixed-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="#" data-toggle="modal" data-target="#conditionsModal" class="nav-link">Conditions Générales d'Utilisation</a>
+                <a href="#" data-toggle="modal" data-target="#infosModal" class="nav-link">A propos de nous</a>
+                <a href="https://patrickgreymatter.github.io/#contact" class="nav-link" target="_blank" rel="noopener noreferrer">Contacter le créateur</a>
+            </div>
+        </footer>
+    </div>
+</nav>
+
+
+
+
+<!-- Modal pour les Conditions Générales d'Utilisation -->
+<div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('conditions')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pour les information d'a propos -->
+<div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('infos')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
