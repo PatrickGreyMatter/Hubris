@@ -7,7 +7,17 @@
     <!-- Preload the background image -->
     <link rel="preload" href="/presentations/website_layout/default_background1.jpg" as="image">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Favicon for standard browsers -->
+    <link rel="icon" href="/presentations//website_layout/favicons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/presentations/website_layout/favicons/favicon.ico" type="image/x-icon">
+    <!-- Favicon for specific devices and situations -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/presentations//website_layout/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/presentations/website_layout/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/presentations/website_layout/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/presentations/website_layout/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/presentations/website_layout/favicons/android-chrome-512x512.png">
+    <!-- Web app manifest -->
+    <link rel="manifest" href="/presentations/website_layout/favicons/site.webmanifest">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -40,10 +50,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm background=#FF2D20">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Hubris-streaming') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Hubris
+                        <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  </a>
+                    </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -69,7 +80,7 @@
                                 </li>
                             @endif
                         @else
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="btn btn-outline-dark border-0 rounded-0" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
                                 <a class="btn btn-outline-dark border-0 rounded-0" href="{{ route('logout') }}"
