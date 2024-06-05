@@ -68,7 +68,7 @@
         color: #ffffff; /* Changez cette valeur pour la couleur souhaitée */
     }
     .card {
-        background-color: #fffbe8; /* Changez cette valeur pour la couleur de fond souhaitée */
+        background-color: #ffffff; /* Changez cette valeur pour la couleur de fond souhaitée */
     }
     .card-title {
         font-size: 1.1rem;

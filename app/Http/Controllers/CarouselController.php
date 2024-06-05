@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class CarouselController extends Controller
 {
@@ -46,4 +48,15 @@ class CarouselController extends Controller
 
         return $films;
     }
+
+    public function getFavoriteFilms()
+    {
+        $userId = Auth::id();
+        $favoriteFilms = Media::whereHas('userLibraries', function($query) use ($userId) {
+            $query->where('user_id', $userId)->where('status', 1);
+        })->get();
+
+        return $favoriteFilms;
+    }
+
 }

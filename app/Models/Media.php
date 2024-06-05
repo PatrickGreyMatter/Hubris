@@ -22,4 +22,9 @@ class Media extends Model
     {
         return $this->belongsTo(Director::class);
     }
+
+    public function userLibraries()
+    {
+        return $this->hasMany(UserLibrary::class, 'media_id', 'id');
+    }
 }

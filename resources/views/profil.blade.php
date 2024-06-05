@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
             <div class="card">
                 <div class="card-header">{{ __('Mon espace') }}</div>
 
@@ -22,7 +22,7 @@
 
     @if (Auth::user()->role == 'user' || Auth::user()->role == 'contributor')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8">
+        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
             <div class="card">
                 <div class="card-header">
                     {{ __('Demande de promotion de rôle') }}
@@ -59,9 +59,27 @@
     </div>
     @endif
 
+    <!-- New Favorite Films Section -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#favoriteFilms" role="button" aria-expanded="false" aria-controls="favoriteFilms">
+                        {{ __('Bibliothèque') }}
+                    </a>
+                </div>
+                <div class="collapse" id="favoriteFilms">
+                    <div class="card-body">
+                        @include('partials._carousel', ['carouselId' => 9, 'carouselTitle' => 'Mes films favoris', 'films' => $favoriteFilms])
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if (Auth::user()->role == 'contributor' || Auth::user()->role == 'admin')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8">
+        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#addFilmForm" role="button" aria-expanded="false" aria-controls="addFilmForm">
@@ -165,7 +183,7 @@
 
     @if (Auth::user()->role == 'admin')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8">
+        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#roleRequests" role="button" aria-expanded="false" aria-controls="roleRequests">
@@ -376,4 +394,18 @@
         });
     });
 </script>
+<style>
+    .collapse {
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+    }
+</style>
+
 @endsection

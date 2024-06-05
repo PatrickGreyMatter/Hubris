@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/films/store', [FilmSubmissionController::class, 'store'])->name('films.store');
     Route::post('/role-request', [RoleRequestController::class, 'store'])->name('role.request');
     Route::get('/favorites/{media_id}', [NotesAndFavoritesController::class, 'addToFavorites'])->name('favorites');
+    Route::get('/user/{id}/favorites', [CarouselController::class, 'getFavoriteFilms'])->name('user.favorites');
 });
 
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
