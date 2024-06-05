@@ -164,6 +164,23 @@
                             Your browser does not support the video tag.
                         </video>
                         <button id="favoriteButton" class="btn btn-primary mt-3">Ajouter a ma librairie</button>
+                        <div class="rating-checkboxes">
+                            <label>
+                                <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> 1
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> 2
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> 3
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> 4
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> 5
+                            </label>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <h2 class="film-title">{{ $film->title }}</h2>
@@ -183,6 +200,38 @@
                             });
                         }
                     });
+                
+                    function updateRating(rating) {
+                        // Uncheck all checkboxes
+                        document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                
+                        // Check the clicked checkbox
+                        document.querySelector('.rating-checkboxes input[value="' + rating + '"]').checked = true;
+                
+                        // Send the rating to the backend
+                        fetch('{{ route('rate.film') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                media_id: '{{ $film->id }}',
+                                rating: rating
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Votre note a été mise à jour.');
+                            } else {
+                                alert('Une erreur s\'est produite.');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
                 </script>
 
 

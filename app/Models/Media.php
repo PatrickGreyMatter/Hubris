@@ -10,7 +10,7 @@ class Media extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'description', 'type', 'director_id', 'length', 'year', 'thumbnail', 'video_url'
+        'title', 'slug', 'description', 'type', 'director_id', 'length', 'year', 'thumbnail', 'video_url', 'average_rating'
     ];
 
     public function tags()
