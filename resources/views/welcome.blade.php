@@ -101,11 +101,11 @@
                          </form>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                                <a class="nav-link" href="{{ route('login') }}">Connexion</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
                                 </li>
                             @endif
                         @endauth
