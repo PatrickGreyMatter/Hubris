@@ -1,3 +1,5 @@
+<!-- welcome.blade.php -->
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -104,14 +106,33 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container mt-5">
-        <main class="mt-6">
-            <div class="wrapper">
-                @include('partials._carousel')
-            </div>
-        </main>
-    </div>
+<!-- Main Content -->
+<div class="container mt-5">
+    <main class="mt-6">
+        <div class="wrapper">
+            @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
+            @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'French Films', 'films' => $frenchFilms])
+            @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => 'Horror Films', 'films' => $horrorFilms])
+            @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drama Films', 'films' => $dramaFilms])
+            @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedy Films', 'films' => $comedyFilms])
+            @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Sf Films', 'films' => $sfFilms])
+            @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thriller Films', 'films' => $thrillerFilms])
+
+        </div>
+    </main>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -1,166 +1,85 @@
 <!-- resources/views/partials/_carousel.blade.php -->
-
 <section class="pt-5 pb-5">
-    <div class="container">
+  <div class="container">
       <div class="row">
-        <div class="col-6">
-          <h3 class="mb-3">Carousel cards title </h3>
-        </div>
-        <div class="col-6 text-right">
-          <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-            <i class="fa fa-arrow-left"></i>
-          </a>
-          <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-            <i class="fa fa-arrow-right"></i>
-          </a>
-        </div>
-        <div class="col-12">
-          <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-  
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="row">
-  
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-                      <div class="card-body">
-                        <h4 class="card-title">card 1</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-                      <div class="card-body">
-                        <h4 class="card-title">card 2</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 3</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 4</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-              
-              
-              <div class="carousel-item">
-                <div class="row">
-  
-                                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-                      <div class="card-body">
-                        <h4 class="card-title">card 5</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-                      <div class="card-body">
-                        <h4 class="card-title">card 6</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 7</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 8</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-  
-                </div>
-              </div>
-              
-              
-              <div class="carousel-item">
-                <div class="row">
-                             <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">
-                      <div class="card-body">
-                        <h4 class="card-title">card 9</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">
-                      <div class="card-body">
-                        <h4 class="card-title">card 10</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 11</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
-                      <div class="card-body">
-                        <h4 class="card-title">card 12</h4>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              
-            </div>
+          <div class="col-12">
+              <h3 class="carousel-title mb-3">{{ $carouselTitle }}</h3>
           </div>
-        </div>
+          <div class="col-12">
+              <div id="carouselExampleIndicators{{ $carouselId }}" class="carousel slide" data-interval="false">
+                  <div class="carousel-inner">
+                      @foreach ($films->chunk(4) as $chunk)
+                          <div class="carousel-item @if($loop->first) active @endif">
+                              <div class="row">
+                                  @foreach ($chunk as $film)
+                                      <div class="col-md-3 mb-3">
+                                          <div class="card h-100">
+                                              <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
+                                              <div class="card-body">
+                                                  <h5 class="card-title">{{ $film->title }}</h5>
+                                                  <p class="card-text">Durée: {{ $film->length }}</p>
+                                                  <p class="card-text">Réalisateur: {{ $film->director->name }}</p>
+                                                  <p class="card-text">
+                                                      Tags: 
+                                                      @foreach ($film->tags as $tag)
+                                                          <span class="badge badge-primary">{{ $tag->name }}</span>
+                                                      @endforeach
+                                                  </p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  @endforeach
+                              </div>
+                          </div>
+                      @endforeach
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 text-center">
+              <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators{{ $carouselId }}" role="button" data-slide="prev">
+                  <i class="fa fa-arrow-left"></i>
+              </a>
+              <a class="btn btn-primary mb-3" href="#carouselExampleIndicators{{ $carouselId }}" role="button" data-slide="next">
+                  <i class="fa fa-arrow-right"></i>
+              </a>
+          </div>
       </div>
-    </div>
-  </section>
-  
+  </div>
+</section>
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://stackpath.amazonaws.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#carouselExampleIndicators{{ $carouselId }}').carousel({
+          interval: false
+      });
+  });
+</script>
+
+<style>
+  .carousel-title {
+      color: #ffffff; /* Changez cette valeur pour la couleur souhaitée */
+  }
+  .card {
+      background-color: #fffbe8; /* Changez cette valeur pour la couleur de fond souhaitée */
+  }
+  .card-title {
+      font-size: 1.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+  .card-text {
+      font-size: 0.9rem;
+  }
+  .badge-primary {
+      background-color: #3d1987;
+      font-size: 0.8rem;
+      margin-right: 2px;
+  }
+</style>

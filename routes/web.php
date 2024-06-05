@@ -5,6 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\FilmSubmissionController;
 use App\Http\Controllers\RoleRequestController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\FilmSubmissionManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -54,3 +55,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+//Carousels fetching routes
+
+Route::get('/films/tag/{tag}', [CarouselController::class, 'getFilmsByTag']);
+Route::get('/films/tags/{tags}', [CarouselController::class, 'getFilmsByTags']);
+Route::get('/films/director/{director}', [CarouselController::class, 'getFilmsByDirector']);
+Route::get('/films/date/{order?}', [CarouselController::class, 'getFilmsByDate']);
