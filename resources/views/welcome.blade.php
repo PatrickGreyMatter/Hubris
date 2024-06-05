@@ -119,6 +119,15 @@
 <div class="container mt-5" style="margin-top: 60px; margin-bottom: 60px;">
     <main class="mt-6">
         <div class="wrapper">
+
+            @if(session('success'))
+            <div class="alert alert-primary">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
+
             @if(isset($query))
                 <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
                 <div class="row">
@@ -129,7 +138,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $film->title }}</h5>
                                     <p class="card-text">Durée: {{ $film->length }}</p>
-                                    <p class="card-text">Réalisateur: {{ $film->director->name }}</p>
+                                    <p class="card-text">De {{ $film->director->name }}</p>
                                     <p class="card-text">
                                         Tags: 
                                         @foreach ($film->tags as $tag)
@@ -141,6 +150,42 @@
                         </div>
                     @endforeach
                 </div>
+
+
+
+
+            @elseif(isset($film))
+                <div class="row">
+                    <div class="col-md-8">
+                        <video controls class="video-player">
+                            <source src="{{ asset($film->video_url) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button id="favoriteButton" class="btn btn-primary mt-3">Ajouter a ma librairie</button>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 class="film-title">{{ $film->title }}</h2>
+                        <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
+                        <p class="film-description">{{ $film->description }}</p>
+                        <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
+                        <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
+                        <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var favoriteButton = document.getElementById('favoriteButton');
+                        if (favoriteButton) {
+                            favoriteButton.addEventListener('click', function() {
+                                window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
+                            });
+                        }
+                    });
+                </script>
+
+
+
+
             @else
                 @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
                 @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
@@ -155,20 +200,42 @@
     </main>
 </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var img = new Image();
-            img.src = "/presentations/website_layout/default_background1.jpg";
-            img.onload = function() {
-                document.body.classList.add('loaded');
-            }
-        });
-    </script>
 
+    <!-- Modals -->
+<!-- Conditions Modal -->
+<div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('conditions')
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Infos Modal -->
+<div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('infos')
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Existing Footer Code -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
         <div class="container">
             <footer class="footer text-center p-0 fixed-bottom">
@@ -186,6 +253,34 @@
             </footer>
         </div>
     </nav>
+
+
+
+
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var img = new Image();
+                img.src = "/presentations/website_layout/default_background1.jpg";
+                img.onload = function() {
+                    document.body.classList.add('loaded');
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var successAlert = document.querySelector('.alert-primary');
+                if (successAlert) {
+                    setTimeout(function() {
+                        successAlert.style.display = 'none';
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                }
+            });
+        </script>
 </body>
 </html>
 
@@ -209,5 +304,35 @@
   }
   .search-result-heading {
     color: white;
+  }
+  .video-player {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 20px;
+      margin-top: 100px;
+  }
+  .film-title {
+      color: #fffbe8;
+      font-size: 2rem;
+      margin-bottom: 50px;
+      margin-top: 50px;
+  }
+  .film-thumbnail {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
+  .film-description, .film-info {
+      color: #fff7d1;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+  }
+  .alert-primary {
+      margin-top: 20px;
+  }
+
+  .custom-modal-content {
+    background-color: #fffbe8 !important;
 }
+
 </style>

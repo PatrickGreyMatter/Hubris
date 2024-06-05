@@ -5,13 +5,14 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\FilmSubmissionController;
 use App\Http\Controllers\RoleRequestController;
+use App\Http\Controllers\FilmController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\FilmSubmissionManagementController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\NotesAndFavoritesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-
 
 Route::middleware(['web'])->group(function () {
     Auth::routes();
@@ -22,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::post('/films/store', [FilmSubmissionController::class, 'store'])->name('films.store');
     Route::post('/role-request', [RoleRequestController::class, 'store'])->name('role.request');
+    Route::get('/favorites/{media_id}', [NotesAndFavoritesController::class, 'addToFavorites'])->name('favorites');
 });
 
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
@@ -37,9 +39,6 @@ Route::middleware(['auth', 'contributor', 'verified'])->group(function () {
 Route::middleware(['auth', 'user', 'verified'])->group(function () {
     // Add user-specific routes here
 });
-
-
-
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -57,8 +56,6 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-
-
 //Carousels fetching routes
 
 Route::get('/films/tag/{tag}', [CarouselController::class, 'getFilmsByTag']);
@@ -67,3 +64,5 @@ Route::get('/films/director/{director}', [CarouselController::class, 'getFilmsBy
 Route::get('/films/date/{order?}', [CarouselController::class, 'getFilmsByDate']);
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+Route::get('/film/{slug}', [FilmController::class, 'show'])->name('film.show');
