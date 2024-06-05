@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/SearchController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\Media;
@@ -18,7 +16,6 @@ class SearchController extends Controller
                         })
                         ->get();
 
-        return view('search_results', compact('films', 'query'));
+        return view('welcome', compact('films', 'query'));
     }
 }
-

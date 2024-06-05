@@ -1,5 +1,3 @@
-<!-- welcome.blade.php -->
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -70,24 +68,22 @@
 <body class="font-sans antialiased">
     <!-- Fixed Header -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <div class="container">
-                <a class="navbar-brand" href="/">Hubris
-                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
-                </a>
-            </div>
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="/">Hubris
+                <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
+            </a>
+            <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
+                <div class="input-group">
+                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+                    </div>
+                </div>
+            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
-                            <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </li>
-                </ul>
                 <ul class="navbar-nav">
                     @if (Route::has('login'))
                         @auth
@@ -116,33 +112,44 @@
     </nav>
 
 <!-- Main Content -->
-<div class="container mt-5">
+<div class="container mt-5" style="margin-top: 60px; margin-bottom: 60px;">
     <main class="mt-6">
         <div class="wrapper">
-            @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
-            @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
-            @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'Films Français', 'films' => $frenchFilms])
-            @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => "Films d'horreur", 'films' => $horrorFilms])
-            @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drames', 'films' => $dramaFilms])
-            @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedies', 'films' => $comedyFilms])
-            @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Films de science fiction', 'films' => $sfFilms])
-            @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thrillers', 'films' => $thrillerFilms])
-
+            @if(isset($query))
+                <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
+                <div class="row">
+                    @foreach ($films as $film)
+                        <div class="col-md-3 mb-4">
+                            <div class="card h-100">
+                                <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $film->title }}</h5>
+                                    <p class="card-text">Durée: {{ $film->length }}</p>
+                                    <p class="card-text">Réalisateur: {{ $film->director->name }}</p>
+                                    <p class="card-text">
+                                        Tags: 
+                                        @foreach ($film->tags as $tag)
+                                            <span class="badge badge-primary">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
+                @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
+                @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'Films Français', 'films' => $frenchFilms])
+                @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => "Films d'horreur", 'films' => $horrorFilms])
+                @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drames', 'films' => $dramaFilms])
+                @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedies', 'films' => $comedyFilms])
+                @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Films de science fiction', 'films' => $sfFilms])
+                @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thrillers', 'films' => $thrillerFilms])
+            @endif
         </div>
     </main>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -160,7 +167,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
         <div class="container">
-            <footer class="footer text-center p-2 fixed-bottom">
+            <footer class="footer text-center p-0 fixed-bottom">
                 <div class="container">
                     <a class="navbar-brand" href="/">
                         <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
@@ -175,39 +182,28 @@
             </footer>
         </div>
     </nav>
-
-    <!-- Modal pour les Conditions Générales d'Utilisation -->
-    <div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('conditions')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal pour les information d'a propos -->
-    <div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('infos')  <!-- Inclure le contenu des CGU à partir d'une vue Blade séparée -->
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
+
+<style>
+    .card-title {
+        font-size: 1.1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .card-text {
+        font-size: 0.9rem;
+    }
+    .badge-primary {
+        background-color: #3d1987;
+        font-size: 0.8rem;
+        margin-right: 2px;
+    }
+    .card {
+      background-color: #fffbe8; /* Changez cette valeur pour la couleur de fond souhaitée */
+  }
+  .search-result-heading {
+    color: white;
+}
+</style>
