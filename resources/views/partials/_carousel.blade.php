@@ -13,7 +13,7 @@
                                 <div class="row">
                                     @foreach ($chunk as $film)
                                         <div class="col-md-3 mb-3">
-                                            <a href="{{ route('film.show', $film->slug) }}">
+                                            <a href="{{ route('film.show', ['slug' => $film->slug]) }}" class="d-block text-decoration-none text-dark">
                                                 <div class="card h-100">
                                                     <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
                                                     <div class="card-body">
