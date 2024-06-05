@@ -39,10 +39,10 @@ class NotesAndFavoritesController extends Controller
         $user = Auth::user();
         $media_id = $request->input('media_id');
         $rating = $request->input('rating');
-
+    
         // Check if the user has already rated this film
         $existingRating = Rating::where('user_id', $user->id)->where('media_id', $media_id)->first();
-
+    
         if ($existingRating) {
             // Update the existing rating
             $existingRating->rating = $rating;
@@ -55,15 +55,17 @@ class NotesAndFavoritesController extends Controller
                 'rating' => $rating
             ]);
         }
-
+    
         // Recalculate the average rating
         $averageRating = Rating::where('media_id', $media_id)->avg('rating');
-
+        $formattedAverageRating = rtrim(rtrim(sprintf('%.1f', $averageRating), '0'), '.');
+    
         // Update the media with the new average rating
         $media = Media::find($media_id);
         $media->average_rating = $averageRating;
         $media->save();
-
-        return response()->json(['success' => true]);
+    
+        return response()->json(['success' => true, 'average_rating' => $formattedAverageRating]);
     }
+    
 }

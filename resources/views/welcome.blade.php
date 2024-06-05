@@ -63,6 +63,22 @@
                 display: none;
             }
         }
+        .rating-section {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .rating-checkboxes {
+            display: flex;
+            margin-left: 10px;
+        }
+        .rating-checkboxes label {
+            margin-right: 10px;
+        }
+        .average-rating {
+            margin-left: 20px;
+            color: #fff7d1;
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -126,8 +142,6 @@
             </div>
         @endif
 
-
-
             @if(isset($query))
                 <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
                 <div class="row">
@@ -153,44 +167,51 @@
                     @endforeach
                 </div>
 
-
-
-
             @elseif(isset($film))
-                <div class="row">
-                    <div class="col-md-8">
-                        <video controls class="video-player">
-                            <source src="{{ asset($film->video_url) }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <button id="favoriteButton" class="btn btn-primary mt-3">Ajouter a ma librairie</button>
-                        <div class="rating-checkboxes">
-                            <label>
-                                <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> 1
-                            </label>
-                            <label>
-                                <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> 2
-                            </label>
-                            <label>
-                                <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> 3
-                            </label>
-                            <label>
-                                <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> 4
-                            </label>
-                            <label>
-                                <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> 5
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h2 class="film-title">{{ $film->title }}</h2>
-                        <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
-                        <p class="film-description">{{ $film->description }}</p>
-                        <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
-                        <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
-                        <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <video controls class="video-player">
+                        <source src="{{ asset($film->video_url) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="d-flex align-items-center mt-3">
+                        <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
+                        <div class="rating-section">
+                            <span class="rating-label">Votre note:</span>
+                            <div class="rating-checkboxes">
+                                <label>
+                                    <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> <span>1</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> <span>2</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> <span>3</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> <span>4</span>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> <span>5</span>
+                                </label>
+                            </div>
+                            <div class="average-rating">
+                                Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
+                            </div>
+                        </div>                            
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <h2 class="film-title">{{ $film->title }}</h2>
+                    <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
+                    <p class="film-description">{{ $film->description }}</p>
+                    <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
+                    <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
+                    <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+                </div>
+            </div>
+            
+            
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
                         var favoriteButton = document.getElementById('favoriteButton');
@@ -201,41 +222,49 @@
                         }
                     });
                 
-                    function updateRating(rating) {
-                        // Uncheck all checkboxes
-                        document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
-                            checkbox.checked = false;
-                        });
-                
-                        // Check the clicked checkbox
-                        document.querySelector('.rating-checkboxes input[value="' + rating + '"]').checked = true;
-                
-                        // Send the rating to the backend
-                        fetch('{{ route('rate.film') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                media_id: '{{ $film->id }}',
-                                rating: rating
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Votre note a été mise à jour.');
-                            } else {
-                                alert('Une erreur s\'est produite.');
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
-                    }
+                    document.addEventListener("DOMContentLoaded", function() {
+    var favoriteButton = document.getElementById('favoriteButton');
+    if (favoriteButton) {
+        favoriteButton.addEventListener('click', function() {
+            window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
+        });
+    }
+});
+
+function updateRating(rating) {
+    // Uncheck all checkboxes
+    document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+
+    // Check the clicked checkbox
+    document.querySelector('.rating-checkboxes input[value="' + rating + '"]').checked = true;
+
+    // Send the rating to the backend
+    fetch('{{ route('rate.film') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            media_id: '{{ $film->id }}',
+            rating: rating
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Votre note a été mise à jour.');
+            document.getElementById('averageRating').textContent = data.average_rating;
+        } else {
+            alert('Une erreur s\'est produite.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
                 </script>
-
-
-
 
             @else
                 @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
@@ -250,7 +279,6 @@
         </div>
     </main>
 </div>
-
 
     <!-- Modals -->
 <!-- Conditions Modal -->
@@ -304,10 +332,6 @@
             </footer>
         </div>
     </nav>
-
-
-
-
 
         <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -385,5 +409,54 @@
   .custom-modal-content {
     background-color: #fffbe8 !important;
 }
+
+.rating-section {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #fffbe8;
+}
+
+.rating-checkboxes {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.rating-checkboxes label {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: #fffbe8;
+    display: flex;
+    align-items: center;
+}
+
+.rating-checkboxes input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+    position: relative;
+    top: 6px;
+}
+
+.rating-checkboxes span {
+    position: relative;
+    top: 4px;
+}
+
+.average-rating {
+    margin-left: 20px;
+    color: #fffbe8;
+    font-size: 1.2rem;
+}
+
+.rating-label {
+    color: #fffbe8;
+    font-size: 1.2rem;
+}
+
+
+
 
 </style>
