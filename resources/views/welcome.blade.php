@@ -73,12 +73,21 @@
         <div class="container">
             <div class="container">
                 <a class="navbar-brand" href="/">Hubris
-                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  </a>
-                </div>
+                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
+                            <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
                 <ul class="navbar-nav">
                     @if (Route::has('login'))
                         @auth
@@ -110,13 +119,14 @@
 <div class="container mt-5">
     <main class="mt-6">
         <div class="wrapper">
+            @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
             @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
-            @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'French Films', 'films' => $frenchFilms])
-            @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => 'Horror Films', 'films' => $horrorFilms])
-            @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drama Films', 'films' => $dramaFilms])
-            @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedy Films', 'films' => $comedyFilms])
-            @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Sf Films', 'films' => $sfFilms])
-            @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thriller Films', 'films' => $thrillerFilms])
+            @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'Films Français', 'films' => $frenchFilms])
+            @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => "Films d'horreur", 'films' => $horrorFilms])
+            @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drames', 'films' => $dramaFilms])
+            @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedies', 'films' => $comedyFilms])
+            @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Films de science fiction', 'films' => $sfFilms])
+            @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thrillers', 'films' => $thrillerFilms])
 
         </div>
     </main>

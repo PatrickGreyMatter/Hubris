@@ -7,6 +7,7 @@ use App\Http\Controllers\FilmSubmissionController;
 use App\Http\Controllers\RoleRequestController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\FilmSubmissionManagementController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -64,3 +65,5 @@ Route::get('/films/tag/{tag}', [CarouselController::class, 'getFilmsByTag']);
 Route::get('/films/tags/{tags}', [CarouselController::class, 'getFilmsByTags']);
 Route::get('/films/director/{director}', [CarouselController::class, 'getFilmsByDirector']);
 Route::get('/films/date/{order?}', [CarouselController::class, 'getFilmsByDate']);
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');

@@ -21,8 +21,11 @@ class WelcomeController extends Controller
         $comedyFilms = $carouselController->getFilmsByTag('Comedie');
         $frenchFilms = $carouselController->getFilmsByTag('Francais');
         $sfFilms = $carouselController->getFilmsByTag('SF');
+
+        // Fetch latest films
+        $latestFilms = $carouselController->getFilmsByDate('desc');
         
         // Pass the films to the view
-        return view('welcome', compact('americanfilms', 'horrorFilms', 'dramaFilms', 'sfFilms', 'frenchFilms', 'thrillerFilms', 'comedyFilms'));
+        return view('welcome', compact('americanfilms', 'horrorFilms', 'dramaFilms', 'sfFilms', 'frenchFilms', 'thrillerFilms', 'comedyFilms', 'latestFilms'));
     }
 }

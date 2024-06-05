@@ -34,9 +34,15 @@ class CarouselController extends Controller
         return $films;
     }
 
-    public function getFilmsByDate($order = 'desc')
+    public function getFilmsByDate($order = 'desc', $limit = null)
     {
-        $films = Media::orderBy('created_at', $order)->get();
+        $query = Media::orderBy('created_at', $order);
+
+        if ($limit) {
+            $query->take($limit);
+        }
+
+        $films = $query->get();
 
         return $films;
     }
