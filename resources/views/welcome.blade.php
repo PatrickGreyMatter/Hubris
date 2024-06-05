@@ -212,26 +212,16 @@
             </div>
             
             
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var favoriteButton = document.getElementById('favoriteButton');
-                        if (favoriteButton) {
-                            favoriteButton.addEventListener('click', function() {
-                                window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
-                            });
-                        }
-                    });
-                
-                    document.addEventListener("DOMContentLoaded", function() {
-    var favoriteButton = document.getElementById('favoriteButton');
-    if (favoriteButton) {
-        favoriteButton.addEventListener('click', function() {
-            window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
-        });
-    }
-});
-
-function updateRating(rating) {
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var favoriteButton = document.getElementById('favoriteButton');
+                    if (favoriteButton) {
+                        favoriteButton.addEventListener('click', function() {
+                            window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
+                        });
+                    }
+                });
+                function updateRating(rating) {
     // Uncheck all checkboxes
     document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
         checkbox.checked = false;
@@ -252,19 +242,28 @@ function updateRating(rating) {
             rating: rating
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.status === 401 || response.redirected) {
+            // Redirect to the login page if the user is not authenticated
+            window.location.href = '{{ route('login') }}';
+        } else {
+            return response.json();
+        }
+    })
     .then(data => {
-        if (data.success) {
+        if (data && data.success) {
             alert('Votre note a été mise à jour.');
             document.getElementById('averageRating').textContent = data.average_rating;
         } else {
-            alert('Une erreur s\'est produite.');
+            alert('Connectez vous pour mettre une note.');
         }
     })
     .catch(error => console.error('Error:', error));
 }
 
+
                 </script>
+                
 
             @else
                 @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
