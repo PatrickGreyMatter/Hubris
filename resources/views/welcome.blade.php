@@ -83,53 +83,55 @@
 </head>
 <body class="font-sans antialiased">
     <!-- Fixed Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="/">Hubris
-                <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
-            </a>
-            <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
-                <div class="input-group">
-                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="navbar-brand" href="/">Hubris
+                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
+                </a>
+                <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
+                    <div class="input-group">
+                        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    @if (Route::has('login'))
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/profil') }}">Profil</a>
-                            </li>
-                            <a class="nav-link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                             {{ __('Déconnexion') }}
-                         </a>
-                         <!-- Logout form -->
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                             @csrf
-                         </form>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Connexion</a>
-                            </li>
-                            @if (Route::has('register'))
+                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        @if (Route::has('login'))
+                            @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                                    <a class="nav-link" href="{{ url('/profil') }}">Profil</a>
                                 </li>
-                            @endif
-                        @endauth
-                    @endif
-                </ul>
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                {{ __('Déconnexion') }}
+                            </a>
+                            <!-- Logout form -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                                    </li>
+                                @endif
+                            @endauth
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    <header>
 
 <!-- Main Content -->
 <div class="container mt-5" style="margin-top: 60px; margin-bottom: 60px;">
