@@ -10,6 +10,6 @@ class FilmController extends Controller
     public function show($slug)
     {
         $film = Media::where('slug', $slug)->firstOrFail();
-        return view('welcome', compact('film'));
+        return view('film', compact('film'));
     }
 }
