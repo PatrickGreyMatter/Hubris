@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Main Content -->
 <div class="container mt-5" style="margin-top: 60px; margin-bottom: 60px;">
     <main class="mt-6">
         <div class="wrapper">
@@ -300,3 +299,4 @@
 }
 
 </style>
+@endsection

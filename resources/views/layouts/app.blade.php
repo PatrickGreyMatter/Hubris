@@ -44,14 +44,14 @@
             background-position: center;
             background-repeat: no-repeat;
         }
-        .fixed-top {
+        header {
             background-color: #343a40; /* Dark background color */
             padding: 0.5rem 1rem;
         }
-        .fixed-top a {
+        header a {
             color: #ffffff; /* White text color */
         }
-        .fixed-top a:hover {
+        header a:hover {
             color: #cccccc; /* Light gray on hover */
         }
         .info {
@@ -70,8 +70,8 @@
 </head>
 <body>
     <div id="app">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container d-flex justify-content-between align-items-center">
                     <a class="navbar-brand" href="/">Hubris
                         <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
@@ -127,7 +127,7 @@
         </main>
 
         <!-- Existing Footer Code -->
-        <footer class="sticky-bottom">
+        <footer class="mt-auto">
             <nav class="footer navbar navbar-expand-lg navbar-dark bg-dark ">
                 <div class="container-fluid">
                 
