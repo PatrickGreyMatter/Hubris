@@ -13,3 +13,6 @@ processeshubris.txt
 
 /public/presentations/images/*
 !/public/presentations/images/.gitkeep
+
+echo "public/presentations/images/" >> .gitignore
+echo "public/presentations/medias/" >> .gitignore
