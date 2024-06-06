@@ -10,7 +10,7 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="d-flex align-items-center mt-3">
-                    <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
+                    <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter à ma librairie</button>
                     <div class="rating-section">
                         <span class="rating-label">Votre note:</span>
                         <div class="rating-checkboxes">
@@ -35,6 +35,13 @@
                         </div>
                     </div>                            
                 </div>
+                @if (Auth::check() && Auth::user()->role == 'admin')
+                <form id="deleteFilmForm" action="{{ route('film.destroy', $film->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?')">Supprimer le film</button>
+                </form>
+                @endif
             </div>
             <div class="col-md-4">
                 <h2 class="film-title">{{ $film->title }}</h2>
@@ -48,7 +55,6 @@
     </div>
 </div>
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var favoriteButton = document.getElementById('favoriteButton');
@@ -58,45 +64,46 @@
             });
         }
     });
+
     function updateRating(rating) {
-// Uncheck all checkboxes
-document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
-    checkbox.checked = false;
-});
+        // Uncheck all checkboxes
+        document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
 
-// Check the clicked checkbox
-document.querySelector('.rating-checkboxes input[value="' + rating + '"]').checked = true;
+        // Check the clicked checkbox
+        document.querySelector('.rating-checkboxes input[value="' + rating + '"]').checked = true;
 
-// Send the rating to the backend
-fetch('{{ route('rate.film') }}', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    body: JSON.stringify({
-        media_id: '{{ $film->id }}',
-        rating: rating
-    })
-})
-.then(response => {
-    if (response.status === 401 || response.redirected) {
-        // Redirect to the login page if the user is not authenticated
-        window.location.href = '{{ route('login') }}';
-    } else {
-        return response.json();
+        // Send the rating to the backend
+        fetch('{{ route('rate.film') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                media_id: '{{ $film->id }}',
+                rating: rating
+            })
+        })
+        .then(response => {
+            if (response.status === 401 || response.redirected) {
+                // Redirect to the login page if the user is not authenticated
+                window.location.href = '{{ route('login') }}';
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data && data.success) {
+                alert('Votre note a été mise à jour.');
+                document.getElementById('averageRating').textContent = data.average_rating;
+            } else {
+                alert('Connectez vous pour mettre une note.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
-})
-.then(data => {
-    if (data && data.success) {
-        alert('Votre note a été mise à jour.');
-        document.getElementById('averageRating').textContent = data.average_rating;
-    } else {
-        alert('Connectez vous pour mettre une note.');
-    }
-})
-.catch(error => console.error('Error:', error));
-}
 </script>
 
 <style>
@@ -152,25 +159,25 @@ fetch('{{ route('rate.film') }}', {
       max-width: 800px;
       margin-bottom: 20px;
       margin-top: 100px;
-  }
+    }
 
-  .film-title {
+    .film-title {
       color: #fffbe8;
       font-size: 2rem;
       margin-bottom: 50px;
       margin-top: 50px;
-  }
+    }
 
-  .film-thumbnail {
+    .film-thumbnail {
       width: 100%;
       height: auto;
       margin-bottom: 20px;
-  }
+    }
 
-  .film-description, .film-info {
+    .film-description, .film-info {
       color: #fff7d1;
       font-size: 1.1rem;
       margin-bottom: 10px;
-  }
+    }
 </style>
 @endsection

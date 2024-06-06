@@ -32,6 +32,7 @@ Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::put('/role-approve/{id}', [RoleRequestController::class, 'approve'])->name('role.approve');
     Route::put('/films-approve/{id}', [FilmSubmissionManagementController::class, 'approve'])->name('films.approve');
     Route::put('/films/{id}/update', [FilmSubmissionManagementController::class, 'update'])->name('films.update');
+    Route::delete('/film/{id}', [FilmController::class, 'destroy'])->name('film.destroy');
 });
 
 Route::middleware(['auth', 'contributor', 'verified'])->group(function () {

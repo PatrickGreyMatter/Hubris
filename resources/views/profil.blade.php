@@ -377,10 +377,10 @@ document.getElementById('filmForm').addEventListener('submit', function(event) {
     // Handle completion
     xhr.onload = function() {
         if (xhr.status == 200) {
-            alert('Upload complete');
+            alert('Nous avons bien reçu vos documents !');
             window.location.reload(); // Reload the page to reflect the new submission
         } else {
-            alert('Error uploading file');
+            alert("Erreur avec l'ajout des documents");
         }
     };
 
