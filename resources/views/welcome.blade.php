@@ -89,19 +89,21 @@
                 <a class="navbar-brand" href="/">Hubris
                     <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
                 </a>
-                <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
-                    <div class="input-group">
-                        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
-                        </div>
-                    </div>
-                </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
+                        <li>
+                            <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
+                                <div class="input-group">
+                                    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
                         @if (Route::has('login'))
                             @auth
                                 <li class="nav-item">
