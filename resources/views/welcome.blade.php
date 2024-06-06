@@ -314,23 +314,32 @@
     </div>
 </div>
 <!-- Existing Footer Code -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-bottom">
-        <div class="container">
-            <footer class="footer text-center p-0 fixed-bottom">
-                <div class="container">
-                    <a class="navbar-brand" href="/">
-                        <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+<footer>
+    <nav class="footer navbar navbar-expand-lg navbar-dark sticky-bottom bg-dark ">
+        <div class="container-fluid">
+           
+                <a class="navbar-brand" href="/">
+                    <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
+                </a>
+            <!--    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a href="#" data-toggle="modal" data-target="#conditionsModal" class="nav-link">Conditions Générales d'Utilisation</a>
+                </li>
+                <li class="nav-item">
                     <a href="#" data-toggle="modal" data-target="#infosModal" class="nav-link">A propos de nous</a>
+                </li>
+                <li class="nav-item">
                     <a href="https://patrickgreymatter.github.io/#contact" class="nav-link" target="_blank" rel="noopener noreferrer">Contacter le créateur</a>
-                </div>
-            </footer>
+                </li>
+            </ul>
         </div>
     </nav>
+</footer>
 
         <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
