@@ -44,62 +44,115 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+        header {
+            background-color: #343a40; /* Dark background color */
+            padding: 0.5rem 1rem;
+        }
+        header a {
+            color: #ffffff; /* White text color */
+        }
+        header a:hover {
+            color: #cccccc; /* Light gray on hover */
+        }
+        .info {
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .arrow__btn {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm background=#FF2D20">
-            <div class="container">
-                <div class="container">
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container d-flex justify-content-between align-items-center">
                     <a class="navbar-brand" href="/">Hubris
-                        <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  </a>
-                    </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <!-- Add your left side navbar items here -->
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
+                        <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">  
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
+                                    <div class="input-group">
+                                        <input class="h-auto form-control mr-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-light" type="submit">Rechercher</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __("Connexion") }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __("S'inscrire") }}</a>
-                                </li>
-                            @endif
-                        @else
-                                <a id="navbarDropdown" class="btn btn-outline-dark border-0 rounded-0" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <a class="btn btn-outline-dark border-0 rounded-0" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/profil') }}">Profil</a>
+                                    </li>
+                                    <a class="nav-link" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
                                     {{ __('Déconnexion') }}
                                 </a>
+                                <!-- Logout form -->
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                        @endguest
-                    </ul>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">Connexion</a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                                        </li>
+                                    @endif
+                                @endauth
+                            @endif
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
 
         <main class="py-4">
             @yield('content')
         </main>
+
+        <!-- Existing Footer Code -->
+        <footer class="mt-auto">
+            <nav class="footer navbar navbar-expand-lg navbar-dark bg-dark ">
+                <div class="container-fluid">
+                
+                        <a class="navbar-brand" href="/">
+                            <img src="{{ asset('/presentations/website_layout/logohubris.png') }}" alt="Your Company Logo" width="30" height="30">
+                        </a>
+                    <!--    
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" data-toggle="modal" data-target="#conditionsModal" class="nav-link">Conditions Générales d'Utilisation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" data-toggle="modal" data-target="#infosModal" class="nav-link">A propos de nous</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://patrickgreymatter.github.io/#contact" class="nav-link" target="_blank" rel="noopener noreferrer">Contacter le créateur</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </footer>
     </div>
 
     <!-- Scripts -->
