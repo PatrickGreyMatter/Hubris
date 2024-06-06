@@ -1,3 +1,4 @@
+<!-- resources/views/film.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -33,7 +34,7 @@
                         <div class="average-rating">
                             Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
                         </div>
-                    </div>                            
+                    </div>
                 </div>
                 @if (Auth::check() && Auth::user()->role == 'admin')
                 <form id="deleteFilmForm" action="{{ route('film.destroy', $film->id) }}" method="POST" style="display:inline;">
@@ -42,6 +43,28 @@
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?')">Supprimer le film</button>
                 </form>
                 @endif
+
+                <!-- Comment Section -->
+                <div class="mt-5">
+                    <h4>Commentaires</h4>
+                    @auth
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="media_id" value="{{ $film->id }}">
+                        <div class="form-group">
+                            <textarea name="content" class="form-control" rows="3" placeholder="Ajoutez un commentaire..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Commenter</button>
+                    </form>
+                    @endauth
+                    @if($film->comments->isNotEmpty())
+                        @foreach($film->comments as $comment)
+                            @include('partials.comment', ['comment' => $comment])
+                        @endforeach
+                    @else
+                        <p>Aucun commentaire pour l'instant.</p>
+                    @endif
+                </div>
             </div>
             <div class="col-md-4">
                 <h2 class="film-title">{{ $film->title }}</h2>
@@ -51,7 +74,7 @@
                 <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
                 <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 

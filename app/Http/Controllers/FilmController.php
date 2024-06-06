@@ -9,9 +9,15 @@ class FilmController extends Controller
 {
     public function show($slug)
     {
-        $film = Media::where('slug', $slug)->firstOrFail();
+        $film = Media::with(['comments' => function ($query) {
+            $query->whereNull('parent_id')->with('replies');
+        }])->where('slug', $slug)->firstOrFail();
+        
         return view('film', compact('film'));
     }
+    
+    
+    
 
     public function getFilmsByTag($tagName)
     {

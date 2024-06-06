@@ -27,4 +27,9 @@ class Media extends Model
     {
         return $this->hasMany(UserLibrary::class, 'media_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
 }

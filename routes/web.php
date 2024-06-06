@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\FilmSubmissionController;
 use App\Http\Controllers\RoleRequestController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\FilmSubmissionManagementController;
 use App\Http\Controllers\SearchController;
@@ -26,6 +27,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/favorites/{media_id}', [NotesAndFavoritesController::class, 'addToFavorites'])->name('favorites');
     Route::get('/user/{id}/favorites', [CarouselController::class, 'getFavoriteFilms'])->name('user.favorites');
     Route::post('/rate', [NotesAndFavoritesController::class, 'rateFilm'])->name('rate.film');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
