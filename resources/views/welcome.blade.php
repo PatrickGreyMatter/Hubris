@@ -1,96 +1,95 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5" style="margin-top: 60px; margin-bottom: 60px;">
-    <main class="mt-6">
-        <div class="wrapper">
+<div class="container">
+    <div class="wrapper">
 
-            @if(session('success'))
-            <div class="alert alert-primary">
-                {{ session('success') }}
-            </div>
-        @endif
+        @if(session('success'))
+        <div class="alert alert-primary">
+            {{ session('success') }}
+        </div>
+    @endif
 
-            @if(isset($query))
-                <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
-                <div class="row">
-                    @foreach ($films as $film)
-                        <div class="col-md-3 mb-4">
-                            <a href="{{ route('film.show', ['slug' => $film->slug]) }}" class="d-block text-decoration-none text-dark">
-                                <div class="card h-100">
-                                    <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $film->title }}</h5>
-                                        <p class="card-text">Durée: {{ $film->length }}</p>
-                                        <p class="card-text">De {{ $film->director->name }}</p>
-                                        <p class="card-text">
-                                            Tags: 
-                                            @foreach ($film->tags as $tag)
-                                                <span class="badge badge-primary">{{ $tag->name }}</span>
-                                            @endforeach
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-
-            @elseif(isset($film))
+        @if(isset($query))
+            <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
             <div class="row">
-                <div class="col-md-8">
-                    <video controls class="video-player">
-                        <source src="{{ asset($film->video_url) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="d-flex align-items-center mt-3">
-                        <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
-                        <div class="rating-section">
-                            <span class="rating-label">Votre note:</span>
-                            <div class="rating-checkboxes">
-                                <label>
-                                    <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> <span>1</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> <span>2</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> <span>3</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> <span>4</span>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> <span>5</span>
-                                </label>
+                @foreach ($films as $film)
+                    <div class="col-md-3 mb-4">
+                        <a href="{{ route('film.show', ['slug' => $film->slug]) }}" class="d-block text-decoration-none text-dark">
+                            <div class="card h-100">
+                                <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $film->title }}</h5>
+                                    <p class="card-text">Durée: {{ $film->length }}</p>
+                                    <p class="card-text">De {{ $film->director->name }}</p>
+                                    <p class="card-text">
+                                        Tags: 
+                                        @foreach ($film->tags as $tag)
+                                            <span class="badge badge-primary">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </p>
+                                </div>
                             </div>
-                            <div class="average-rating">
-                                Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
-                            </div>
-                        </div>                            
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <h2 class="film-title">{{ $film->title }}</h2>
-                    <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
-                    <p class="film-description">{{ $film->description }}</p>
-                    <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
-                    <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
-                    <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+                @endforeach
+            </div>
+
+        @elseif(isset($film))
+        <div class="row">
+            <div class="col-md-8">
+                <video controls class="video-player">
+                    <source src="{{ asset($film->video_url) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="d-flex align-items-center mt-3">
+                    <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
+                    <div class="rating-section">
+                        <span class="rating-label">Votre note:</span>
+                        <div class="rating-checkboxes">
+                            <label>
+                                <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> <span>1</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> <span>2</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> <span>3</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> <span>4</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> <span>5</span>
+                            </label>
+                        </div>
+                        <div class="average-rating">
+                            Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
+                        </div>
+                    </div>                            
                 </div>
             </div>
-            
-            
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    var favoriteButton = document.getElementById('favoriteButton');
-                    if (favoriteButton) {
-                        favoriteButton.addEventListener('click', function() {
-                            window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
-                        });
-                    }
-                });
-                function updateRating(rating) {
+            <div class="col-md-4">
+                <h2 class="film-title">{{ $film->title }}</h2>
+                <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
+                <p class="film-description">{{ $film->description }}</p>
+                <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
+                <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
+                <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+            </div>
+        </div>
+        
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var favoriteButton = document.getElementById('favoriteButton');
+                if (favoriteButton) {
+                    favoriteButton.addEventListener('click', function() {
+                        window.location.href = '{{ route('favorites', ['media_id' => $film->id]) }}';
+                    });
+                }
+            });
+            function updateRating(rating) {
     // Uncheck all checkboxes
     document.querySelectorAll('.rating-checkboxes input[type="checkbox"]').forEach(function(checkbox) {
         checkbox.checked = false;
@@ -131,21 +130,20 @@
 }
 
 
-                </script>
-                
+            </script>
+            
 
-            @else
-                @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
-                @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
-                @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'Films Français', 'films' => $frenchFilms])
-                @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => "Films d'horreur", 'films' => $horrorFilms])
-                @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drames', 'films' => $dramaFilms])
-                @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedies', 'films' => $comedyFilms])
-                @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Films de science fiction', 'films' => $sfFilms])
-                @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thrillers', 'films' => $thrillerFilms])
-            @endif
-        </div>
-    </main>
+        @else
+            @include('partials._carousel', ['carouselId' => 8, 'carouselTitle' => 'Derniers ajouts', 'films' => $latestFilms])
+            @include('partials._carousel', ['carouselId' => 1, 'carouselTitle' => 'Films americains', 'films' => $americanfilms])
+            @include('partials._carousel', ['carouselId' => 2, 'carouselTitle' => 'Films Français', 'films' => $frenchFilms])
+            @include('partials._carousel', ['carouselId' => 3, 'carouselTitle' => "Films d'horreur", 'films' => $horrorFilms])
+            @include('partials._carousel', ['carouselId' => 4, 'carouselTitle' => 'Drames', 'films' => $dramaFilms])
+            @include('partials._carousel', ['carouselId' => 5, 'carouselTitle' => 'Comedies', 'films' => $comedyFilms])
+            @include('partials._carousel', ['carouselId' => 6, 'carouselTitle' => 'Films de science fiction', 'films' => $sfFilms])
+            @include('partials._carousel', ['carouselId' => 7, 'carouselTitle' => 'Thrillers', 'films' => $thrillerFilms])
+        @endif
+    </div>
 </div>
 
     <!-- Modals -->
