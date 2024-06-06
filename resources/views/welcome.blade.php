@@ -94,12 +94,12 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li>
+                        <li class="nav-item">
                             <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
                                 <div class="input-group">
-                                    <input class="h-auto form-control mr-sm-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
+                                    <input class="h-auto form-control mr-2" type="search" name="query" placeholder="Rechercher un film..." aria-label="Search">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+                                        <button class="btn btn-outline-light" type="submit">Rechercher</button>
                                     </div>
                                 </div>
                             </form>
