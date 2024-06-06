@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="wrapper">
-        <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{ $query }}"</h3>
+        <h3 class="search-result-heading" style="margin-top: 60px;">Résultats de recherche pour "{{$query}}"</h3>
         <div class="row">
             @foreach ($films as $film)
                 <div class="col-md-3 mb-4">
                     <a href="{{ route('film.show', ['slug' => $film->slug]) }}" class="d-block text-decoration-none text-dark">
                         <div class="card h-100">
-                            <img class="img-fluid" src="{{ $film->thumbnail }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
+                            <img class="img-fluid" src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" style="width: 100%; height: 300px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $film->title }}</h5>
                                 <p class="card-text">Durée: {{ $film->length }}</p>

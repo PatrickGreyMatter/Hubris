@@ -60,11 +60,14 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 //Carousels fetching routes
 
-Route::get('/films/tag/{tag}', [CarouselController::class, 'getFilmsByTag'])->name('films.tag');
-Route::get('/films/tags/{tags}', [CarouselController::class, 'getFilmsByTags']);
-Route::get('/films/director/{director}', [CarouselController::class, 'getFilmsByDirector']);
-Route::get('/films/date/{order?}', [CarouselController::class, 'getFilmsByDate']);
+Route::get('/api/films/tag/{tag}', [CarouselController::class, 'getFilmsByTag']);
+Route::get('/api/films/tags/{tags}', [CarouselController::class, 'getFilmsByTags']);
+Route::get('/api/films/director/{director}', [CarouselController::class, 'getFilmsByDirector']);
+Route::get('/api/films/date/{order?}', [CarouselController::class, 'getFilmsByDate']);
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/film/{slug}', [FilmController::class, 'show'])->name('film.show');
+
+Route::get('/films/tag/{tag}', [FilmController::class, 'getFilmsByTag'])->name('films.tag');
+
