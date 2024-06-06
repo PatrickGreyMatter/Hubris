@@ -166,6 +166,7 @@
                                     <input id="video_url" type="file" class="form-control" name="video_url" required>
                                 </div>
                             </div>
+                      
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary btn-outline-dark border-0 rounded-0 auto-hover">
@@ -174,6 +175,10 @@
                                 </div>
                             </div>
                         </form>
+                        
+                        <div class="progress mt-3">
+                            <div class="progress-bar" id="uploadProgressBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -347,6 +352,46 @@
 </div>
 
 <script>
+
+
+
+document.getElementById('filmForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '{{ route('films.store') }}', true);
+
+    // Update progress bar
+    xhr.upload.addEventListener('progress', function(event) {
+        if (event.lengthComputable) {
+            let percentComplete = (event.loaded / event.total) * 100;
+            let progressBar = document.getElementById('uploadProgressBar');
+            progressBar.style.width = percentComplete + '%';
+            progressBar.setAttribute('aria-valuenow', percentComplete);
+            progressBar.textContent = percentComplete.toFixed(2) + '%';
+        }
+    });
+
+    // Handle completion
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            alert('Upload complete');
+            window.location.reload(); // Reload the page to reflect the new submission
+        } else {
+            alert('Error uploading file');
+        }
+    };
+
+    xhr.send(formData);
+});
+
+
+
+
+
+
     function toggleDirectorSelect() {
         var newDirectorInput = document.getElementById('new-director');
         var directorSelect = document.getElementById('director');
@@ -394,6 +439,44 @@
         });
     });
 </script>
+
+
+    <!-- Modals -->
+<!-- Conditions Modal -->
+<div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('conditions')
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Infos Modal -->
+<div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('infos')
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <style>
     .collapse {
         width: 100%;
@@ -408,4 +491,4 @@
     }
 </style>
 
-@endsection
+@endsection             

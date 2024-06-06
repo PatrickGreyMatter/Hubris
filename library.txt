@@ -1,122 +1,247 @@
 tag obligatoires : aussi j'ai remarqué une autre chose un utilisateur avec le bon rôle peut cliquer sur proposer un film même s'il n'a pas mis de tags, mais il ne reçoit pas d'erreur, il est just renvoyer a la page profil et rien ne se passe, il faudrait mettre une alerte en place ou rendre le remplissage d'au moins un tag obligatoire
 
 
+- autoriser tout les types de fichiers images, videos aussi
+- ajouter un semblant d'ux pour le processus de téléchargement
 
 
-Horror
+- faire l'espace commentaire 
 
-Nosferatu (1922) - Silent horror classic.
-Carnival of Souls (1962) - Psychological horror.
-House on Haunted Hill (1959) - Supernatural horror.
-The Phantom of the Opera (1925) - Silent horror.
-The Cabinet of Dr. Caligari (1920) - German Expressionist horror.
-Night of the Living Dead (1968) - Zombie horror.
+- ajouter une fonction supprimer le film (peut etre modifier aussi) pour les admins sur les pages films
 
+- fix le footer dans la page profil et ajouter les modals
+
+
+
+
+France
+Les Diaboliques (1955) - Thriller, Horreur
+Les Enfants du Paradis (1945) - Drame, Romance
+La Grande Illusion (1937) - Drame, Guerre
+La Règle du Jeu (1939) - Drame, Comédie
+À bout de souffle (1960) - Drame, Policier
+Les Quatre Cents Coups (1959) - Drame
+Hiroshima mon amour (1959) - Drame, Romance
+Le Salaire de la Peur (1953) - Aventure, Thriller
+L'Année Dernière à Marienbad (1961) - Drame, Mystère
+Jules et Jim (1962) - Drame, Romance
+
+Royaume-Uni
+Lawrence of Arabia (1962) - Aventure, Drame
+The Third Man (1949) - Thriller, Film Noir
+A Clockwork Orange (1971) - SF, Drame
+The Wicker Man (1973) - Horreur, Mystère
+The Ladykillers (1955) - Comédie, Policier
+Brief Encounter (1945) - Drame, Romance
+Zulu (1964) - Guerre, Drame
+Great Expectations (1946) - Drame
+The Bridge on the River Kwai (1957) - Drame, Guerre
+Oliver! (1968) - Musical, Drame
+
+Chine
+The Spring River Flows East (1947) - Drame
+The Goddess (1934) - Drame
+Yellow Earth (1984) - Drame
+Spring in a Small Town (1948) - Drame, Romance
+Red Sorghum (1988) - Drame, Guerre
+The Love Eterne (1963) - Romance, Musical
+The Blue Kite (1993) - Drame, Historique
+The Housemaid (1960) - Drame, Horreur
+A Touch of Zen (1971) - Aventure, Drame
+Farewell My Concubine (1993) - Drame, Musical
+
+Corée
+The Housemaid (1960) - Drame, Horreur
+Aimless Bullet (1961) - Drame
+Obaltan (1961) - Drame, Policier
+Mother and a Guest (1961) - Drame, Romance
+The Flower in Hell (1958) - Drame, Policier
+Yangsan Province (1955) - Drame, Romance
+Seaside Village (1965) - Drame
+The Devil's Stairway (1964) - Horreur, Mystère
+The Empty Dream (1965) - Drame, Romance
+A Petty Middle Manager (1961) - Drame, Comédie
+
+Japon
+Rashomon (1950) - Drame, Mystère
+Seven Samurai (1954) - Aventure, Drame
+Ugetsu (1953) - Drame, Fantastique
+Tokyo Story (1953) - Drame
+Harakiri (1962) - Drame
+Kwaidan (1964) - Horreur, Fantastique
+Woman in the Dunes (1964) - Drame, Mystère
+Ran (1985) - Drame, Guerre
+Ikiru (1952) - Drame
+Throne of Blood (1957) - Drame, Horreur
+
+Arabie
+The Night of Counting the Years (1969) - Drame
+The Mummy (1969) - Drame
+Al-Mummia (1969) - Drame
+Chased by the Dogs (1962) - Drame
+The Land (1969) - Drame
+The Return of the Prodigal Son (1976) - Drame
+Cairo Station (1958) - Drame
+Watch Out for Zouzou (1972) - Comédie
+A Taste of Fear (1969) - Drame
+For Men Only (1964) - Comédie
+
+Espagne
+Viridiana (1961) - Drame
+El ángel exterminador (1962) - Drame
+Los olvidados (1950) - Drame
+Tristana (1970) - Drame
+El espíritu de la colmena (1973) - Drame
+La caza (1966) - Drame
+Muerte de un ciclista (1955) - Drame
+Cría cuervos (1976) - Drame
+El Sur (1983) - Drame
+Nazarín (1959) - Drame
+
+Italie
+Ladri di biciclette (1948) - Drame
+La dolce vita (1960) - Drame
+Il buono, il brutto, il cattivo (1966) - Western
+Otto e mezzo (1963) - Drame
+Roma città aperta (1945) - Guerre
+L'avventura (1960) - Mystère
+La battaglia di Algeri (1966) - Drame
+Amarcord (1973) - Comédie
+Riso amaro (1949) - Drame
+Il conformista (1970) - Drame
+
+
+
+
+
+
+Horreur
+Psycho (1960) - Réalisé par Alfred Hitchcock
+Night of the Living Dead (1968) - Réalisé par George A. Romero
+The Exorcist (1973) - Réalisé par William Friedkin
+Rosemary's Baby (1968) - Réalisé par Roman Polanski
+Nosferatu (1922) - Réalisé par F.W. Murnau
 
 Thriller
+Vertigo (1958) - Réalisé par Alfred Hitchcock
+The Third Man (1949) - Réalisé par Carol Reed
+Chinatown (1974) - Réalisé par Roman Polanski (juste à la limite)
+M (1931) - Réalisé par Fritz Lang
+Cape Fear (1962) - Réalisé par J. Lee Thompson
 
-The Hitch-Hiker (1953) - Film noir thriller.
-Dementia 13 (1963) - Psychological thriller.
-The 39 Steps (1935) - Classic thriller.
-The Third Man (1949) - Film noir thriller.
-The Stranger (1946) - Orson Welles thriller.
+Comédie
+Some Like It Hot (1959) - Réalisé par Billy Wilder
+Duck Soup (1933) - Réalisé par Leo McCarey
+The Great Dictator (1940) - Réalisé par Charlie Chaplin
+A Night at the Opera (1935) - Réalisé par Sam Wood
+Dr. Strangelove (1964) - Réalisé par Stanley Kubrick
 
-
-Comedy
-
-His Girl Friday (1940) - Classic comedy.
-The General (1926) - Silent comedy.
-My Man Godfrey (1936) - Screwball comedy.
-The Gold Rush (1925) - Charlie Chaplin comedy.
-Duck Soup (1933) - Marx Brothers comedy.
-
-
-Adventure
-
-Captain Kidd (1945) - Pirate adventure.
-The Mark of Zorro (1920) - Swashbuckler.
-Robin Hood (1922) - Classic adventure.
-The Most Dangerous Game (1932) - Adventure thriller.
-20,000 Leagues Under the Sea (1916) - Early sci-fi adventure.
-
-
-Animated Films
-
-Gulliver's Travels (1939) - Animated feature.
-The Adventures of Prince Achmed (1926) - Silent animated film.
-Snow White (1933) - Early animated short.
-Betty Boop (Various) - Classic animated shorts.
-Popeye the Sailor Meets Sindbad the Sailor (1936) - Animated short.
-
+Aventure
+Lawrence of Arabia (1962) - Réalisé par David Lean
+The Adventures of Robin Hood (1938) - Réalisé par Michael Curtiz
+King Kong (1933) - Réalisé par Merian C. Cooper et Ernest B. Schoedsack
+Treasure Island (1950) - Réalisé par Byron Haskin
+Journey to the Center of the Earth (1959) - Réalisé par Henry Levin
 
 Romance
+Gone with the Wind (1939) - Réalisé par Victor Fleming
+Casablanca (1942) - Réalisé par Michael Curtiz
+Breakfast at Tiffany's (1961) - Réalisé par Blake Edwards
+Roman Holiday (1953) - Réalisé par William Wyler
+An Affair to Remember (1957) - Réalisé par Leo McCarey
 
-Charade (1963) - Romantic comedy thriller.
-The Sheik (1921) - Silent romantic drama.
-A Star is Born (1937) - Romantic drama.
-It Happened One Night (1934) - Romantic comedy.
-Love Affair (1939) - Romantic drama.
+Animation
+Snow White and the Seven Dwarfs (1937) - Disney
+Pinocchio (1940) - Disney
+Fantasia (1940) - Disney
+Bambi (1942) - Disney
+Astro Boy (1963) - Osamu Tezuka (anime japonais)
+Akira (1988) - Katsuhiro Otomo (cela dépasse légèrement la date mais est culte)
+Jungle Taitei (1965) - Osamu Tezuka (anime japonais)
+One Hundred and One Dalmatians (1961) - Disney
+The Sword in the Stone (1963) - Disney
+The Jungle Book (1967) - Disney
 
+Drame
+Citizen Kane (1941) - Réalisé par Orson Welles
+On the Waterfront (1954) - Réalisé par Elia Kazan
+12 Angry Men (1957) - Réalisé par Sidney Lumet
+To Kill a Mockingbird (1962) - Réalisé par Robert Mulligan
+Rebel Without a Cause (1955) - Réalisé par Nicholas Ray
 
-Drama
-
-The Red House (1947) - Psychological thriller drama.
-A Star is Born (1937) - Classic drama.
-Rebecca (1940) - Gothic drama.
-Wuthering Heights (1939) - Romantic drama.
-M (1931) - Crime drama.
-
-
-Science Fiction
-
-Metropolis (1927) - Silent sci-fi classic.
-The Day the Earth Stood Still (1951) - Sci-fi classic.
-Things to Come (1936) - Futuristic sci-fi.
-A Trip to the Moon (1902) - Early sci-fi short.
-Flash Gordon Conquers the Universe (1940) - Sci-fi serial.
-
-
-Film Noir
-
-The Strange Love of Martha Ivers (1946) - Film noir.
-The Naked Kiss (1964) - Film noir.
-Detour (1945) - Classic film noir.
-D.O.A. (1949) - Film noir.
-Scarlet Street (1945) - Film noir.
-
-
-Psychological Horror
-
-The Cabinet of Dr. Caligari (1920) - Psychological horror.
-Carnival of Souls (1962) - Psychological horror.
-Dementia 13 (1963) - Psychological thriller.
-Night of the Living Dead (1968) - Psychological horror.
-The Red House (1947) - Psychological thriller.
-
+Science-Fiction
+2001: A Space Odyssey (1968) - Réalisé par Stanley Kubrick
+Metropolis (1927) - Réalisé par Fritz Lang
+The Day the Earth Stood Still (1951) - Réalisé par Robert Wise
+Forbidden Planet (1956) - Réalisé par Fred M. Wilcox
+Planet of the Apes (1968) - Réalisé par Franklin J. Schaffner
 
 Gore
+Blood Feast (1963) - Réalisé par Herschell Gordon Lewis
+The Texas Chain Saw Massacre (1974) - Réalisé par Tobe Hooper (juste à la limite)
+Night of the Living Dead (1968) - Réalisé par George A. Romero
+The Wizard of Gore (1970) - Réalisé par Herschell Gordon Lewis
+The House That Screamed (1969) - Réalisé par Narciso Ibáñez Serrador
 
-Night of the Living Dead (1968) - Zombie horror.
-Blood Feast (1963) - Early gore film.
-The Gore Gore Girls (1972) - Gore horror.
-Maniac (1934) - Early exploitation film.
-Herschell Gordon Lewis (Various) - Gore films by the director.
-Additional Genres
-
+Mystère
+Chinatown (1974) - Réalisé par Roman Polanski (juste à la limite)
+Rear Window (1954) - Réalisé par Alfred Hitchcock
+The Maltese Falcon (1941) - Réalisé par John Huston
+Laura (1944) - Réalisé par Otto Preminger
+Vertigo (1958) - Réalisé par Alfred Hitchcock
 
 Western
+The Good, the Bad and the Ugly (1966) - Réalisé par Sergio Leone
+Stagecoach (1939) - Réalisé par John Ford
+Shane (1953) - Réalisé par George Stevens
+High Noon (1952) - Réalisé par Fred Zinnemann
+The Searchers (1956) - Réalisé par John Ford
 
-Stagecoach (1939) - Classic western.
-The Great Train Robbery (1903) - Early western.
-The Outlaw (1943) - Western drama.
-The Ox-Bow Incident (1943) - Western drama.
-McLintock! (1963) - Comedy western.
+Psychologique
+Vertigo (1958) - Réalisé par Alfred Hitchcock
+A Clockwork Orange (1971) - Réalisé par Stanley Kubrick
+Persona (1966) - Réalisé par Ingmar Bergman
+Psycho (1960) - Réalisé par Alfred Hitchcock
+Repulsion (1965) - Réalisé par Roman Polanski
 
+Musical
+Singin' in the Rain (1952) - Réalisé par Gene Kelly et Stanley Donen
+The Sound of Music (1965) - Réalisé par Robert Wise
+West Side Story (1961) - Réalisé par Jerome Robbins et Robert Wise
+My Fair Lady (1964) - Réalisé par George Cukor
+Mary Poppins (1964) - Réalisé par Robert Stevenson
 
-Mystery
+Guerre
+Lawrence of Arabia (1962) - Réalisé par David Lean
+The Bridge on the River Kwai (1957) - Réalisé par David Lean
+All Quiet on the Western Front (1930) - Réalisé par Lewis Milestone
+Paths of Glory (1957) - Réalisé par Stanley Kubrick
+Gone with the Wind (1939) - Réalisé par Victor Fleming
 
-Sherlock Holmes (Various) - Films featuring the famous detective.
-The Thin Man (1934) - Mystery comedy.
-The Lady Vanishes (1938) - Hitchcock mystery.
-And Then There Were None (1945) - Agatha Christie adaptation.
-The Most Dangerous Game (1932) - Adventure mystery.
+Noir
+Double Indemnity (1944) - Réalisé par Billy Wilder
+The Maltese Falcon (1941) - Réalisé par John Huston
+Touch of Evil (1958) - Réalisé par Orson Welles
+Sunset Boulevard (1950) - Réalisé par Billy Wilder
+Out of the Past (1947) - Réalisé par Jacques Tourneur
+
+Familial
+The Wizard of Oz (1939) - Réalisé par Victor Fleming
+Mary Poppins (1964) - Réalisé par Robert Stevenson
+Willy Wonka & the Chocolate Factory (1971) - Réalisé par Mel Stuart
+The Sound of Music (1965) - Réalisé par Robert Wise
+Swiss Family Robinson (1960) - Réalisé par Ken Annakin
+
+Policier
+The Godfather (1972) - Réalisé par Francis Ford Coppola
+Chinatown (1974) - Réalisé par Roman Polanski (juste à la limite)
+The French Connection (1971) - Réalisé par William Friedkin
+Serpico (1973) - Réalisé par Sidney Lumet
+Bullitt (1968) - Réalisé par Peter Yates
+
+Anglais (Films en anglais, déjà inclus dans les catégories ci-dessus)
+Lawrence of Arabia (1962) - Aventure, Drame
+The Third Man (1949) - Thriller, Film Noir
+A Clockwork Orange (1971) - SF, Drame
+The Wicker Man (1973) - Horreur, Mystère
+The Ladykillers (1955) - Comédie, Policier

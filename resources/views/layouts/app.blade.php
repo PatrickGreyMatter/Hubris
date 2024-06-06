@@ -69,6 +69,11 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
         header {
             background-color: #343a40; /* Dark background color */
             padding: 0.5rem 1rem;
@@ -84,6 +89,24 @@
             color: white;
             background: rgba(0, 0, 0, 0.7);
             padding: 10px;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 0.09rem 0;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        footer a:hover {
+            color: lightgray;
         }
 
         @media only screen and (max-width: 600px) {
@@ -151,7 +174,6 @@
             @yield('content')
         </main>
 
-        <!-- Existing Footer Code -->
         <footer class="mt-auto">
             <nav class="footer navbar navbar-expand-lg navbar-dark bg-dark ">
                 <div class="container-fluid">
@@ -179,42 +201,6 @@
             </nav>
         </footer>
     </div>
-
-            <!-- Modals -->
-    <!-- Conditions Modal -->
-    <div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('conditions')
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Infos Modal -->
-    <div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('infos')
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
