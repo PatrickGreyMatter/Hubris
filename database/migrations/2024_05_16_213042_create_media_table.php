@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('type');
-            $table->string('director');
             $table->string('length');
             $table->string('year');
             $table->string('thumbnail', 255);
