@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('type');
             $table->string('director');
-            $table->string('lenght');
+            $table->string('length');
             $table->string('year');
             $table->string('thumbnail', 255);
             $table->string('video_url', 255);
