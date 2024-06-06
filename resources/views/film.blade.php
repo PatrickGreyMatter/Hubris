@@ -1,47 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="row">
-    <div class="col-md-8">
-        <video controls class="video-player">
-            <source src="{{ asset($film->video_url) }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="d-flex align-items-center mt-3">
-            <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
-            <div class="rating-section">
-                <span class="rating-label">Votre note:</span>
-                <div class="rating-checkboxes">
-                    <label>
-                        <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> <span>1</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> <span>2</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> <span>3</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> <span>4</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> <span>5</span>
-                    </label>
+<div class="container">
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-md-8">
+                <video controls class="video-player">
+                    <source src="{{ asset($film->video_url) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="d-flex align-items-center mt-3">
+                    <button id="favoriteButton" class="btn btn-primary" style="margin-right: 20px;">Ajouter a ma librairie</button>
+                    <div class="rating-section">
+                        <span class="rating-label">Votre note:</span>
+                        <div class="rating-checkboxes">
+                            <label>
+                                <input type="checkbox" name="rating" value="1" onclick="updateRating(1)"> <span>1</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="2" onclick="updateRating(2)"> <span>2</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="3" onclick="updateRating(3)"> <span>3</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="4" onclick="updateRating(4)"> <span>4</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="rating" value="5" onclick="updateRating(5)"> <span>5</span>
+                            </label>
+                        </div>
+                        <div class="average-rating">
+                            Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
+                        </div>
+                    </div>                            
                 </div>
-                <div class="average-rating">
-                    Note: <span id="averageRating">{{ $film->average_rating ?? 'N/A' }}</span>/5
-                </div>
-            </div>                            
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h2 class="film-title">{{ $film->title }}</h2>
-        <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
-        <p class="film-description">{{ $film->description }}</p>
-        <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
-        <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
-        <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+            </div>
+            <div class="col-md-4">
+                <h2 class="film-title">{{ $film->title }}</h2>
+                <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
+                <p class="film-description">{{ $film->description }}</p>
+                <p class="film-info"><strong>Durée:</strong> {{ $film->length }}</p>
+                <p class="film-info"><strong>Année:</strong> {{ $film->year }}</p>
+                <p class="film-info"><strong>Réalisateur:</strong> {{ $film->director->name }}</p>
+            </div>
+        </div>    
     </div>
 </div>
 
@@ -163,7 +166,7 @@ fetch('{{ route('rate.film') }}', {
       height: auto;
       margin-bottom: 20px;
   }
-  
+
   .film-description, .film-info {
       color: #fff7d1;
       font-size: 1.1rem;
