@@ -16,6 +16,6 @@ class SearchController extends Controller
                         })
                         ->get();
 
-        return view('welcome', compact('films', 'query'));
+        return view('searchedFilms', compact('films', 'query'));
     }
 }

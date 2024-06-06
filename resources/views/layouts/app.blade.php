@@ -30,6 +30,31 @@
     <!-- Styles -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
+        .alert-primary {
+            margin-top: 20px;
+        }
+
+        .custom-modal-content {
+            background-color: #fffbe8 !important;
+        }
+        .badge-primary {
+            background-color: #3d1987;
+            font-size: 0.8rem;
+            margin-right: 2px;
+        }
+        .card {
+            background-color: #fffbe8; /* Changez cette valeur pour la couleur de fond souhaitée */
+        }
+        .card-title {
+            font-size: 1.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-text {
+            font-size: 0.9rem;
+        }
+
         body {
             background: #0a0b5b56; /* Use a light grey color or similar to your image */
             min-height: 100vh;
@@ -154,6 +179,42 @@
             </nav>
         </footer>
     </div>
+
+            <!-- Modals -->
+    <!-- Conditions Modal -->
+    <div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('conditions')
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infos Modal -->
+    <div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('infos')
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
