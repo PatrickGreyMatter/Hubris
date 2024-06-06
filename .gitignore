@@ -8,8 +8,8 @@
 /storage/logs
 processeshubris.txt
 # Ignore media files but keep the directory
-/public/presentation/medias/*
-!/public/presentation/medias/.gitkeep
+/public/presentations/medias/*
+!/public/presentations/medias/.gitkeep
 
-/public/presentation/images/*
-!/public/presentation/images/.gitkeep
+/public/presentations/images/*
+!/public/presentations/images/.gitkeep
