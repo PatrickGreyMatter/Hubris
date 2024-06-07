@@ -144,15 +144,17 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('/profil') }}">Profil</a>
                                     </li>
-                                    <a class="nav-link" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                    {{ __('Déconnexion') }}
-                                </a>
-                                <!-- Logout form -->
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Déconnexion') }}
+                                        </a>
+                                        <!-- Logout form -->
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 @else
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('login') }}">Connexion</a>
@@ -167,6 +169,9 @@
                         </ul>
                     </div>
                 </div>
+                <li class="nav-item">
+                    <span class="navbar-text">Connecté en tant que {{ Auth::user()->name }}</span>
+                </li>
             </nav>
         </header>
 
@@ -175,7 +180,7 @@
         </main>
 
         <footer class="mt-auto">
-            <nav class="footer navbar navbar-expand-lg navbar-dark bg-dark ">
+            <nav class="footer navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                 
                         <a class="navbar-brand" href="/">
@@ -202,39 +207,39 @@
         </footer>
     </div>
     <!-- Modals -->
-<!-- Conditions Modal -->
-<div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('conditions')
+    <!-- Conditions Modal -->
+    <div class="modal fade" id="conditionsModal" tabindex="-1" role="dialog" aria-labelledby="conditionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="conditionsModalLabel">Conditions Générales d'Utilisation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('conditions')
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Infos Modal -->
-<div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('infos')
+    <!-- Infos Modal -->
+    <div class="modal fade" id="infosModal" tabindex="-1" role="dialog" aria-labelledby="infosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infosModalLabel">A propos de nous</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include('infos')
+                </div>
             </div>
         </div>
     </div>
-</div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

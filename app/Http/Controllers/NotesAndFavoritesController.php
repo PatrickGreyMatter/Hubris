@@ -10,6 +10,30 @@ use Illuminate\Support\Facades\Auth;
 
 class NotesAndFavoritesController extends Controller
 {
+
+
+    public function removeFromLibrary($media_id)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('message', 'Vous devez vous connecter pour supprimer un film de votre librairie.');
+        }
+
+        $user = Auth::user();
+
+        // Find and delete the entry from the user's library
+        $favorite = UserLibrary::where('user_id', $user->id)->where('media_id', $media_id)->first();
+
+        if ($favorite) {
+            $favorite->delete();
+            $message = 'Le film a été supprimé de votre librairie.';
+        } else {
+            $message = 'Le film n\'a pas été trouvé dans votre librairie.';
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
+
+
     public function addToFavorites($media_id)
     {
         if (!Auth::check()) {

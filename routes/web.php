@@ -24,8 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
     Route::post('/films/store', [FilmSubmissionController::class, 'store'])->name('films.store');
     Route::post('/role-request', [RoleRequestController::class, 'store'])->name('role.request');
+
     Route::get('/favorites/{media_id}', [NotesAndFavoritesController::class, 'addToFavorites'])->name('favorites');
     Route::get('/user/{id}/favorites', [CarouselController::class, 'getFavoriteFilms'])->name('user.favorites');
+    Route::delete('/library/remove/{id}', [NotesAndFavoritesController::class, 'removeFromLibrary'])->name('library.remove');
+
+
     Route::post('/rate', [NotesAndFavoritesController::class, 'rateFilm'])->name('rate.film');
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

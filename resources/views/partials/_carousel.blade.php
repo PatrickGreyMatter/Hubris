@@ -30,23 +30,23 @@
             </div>
         </div>
     </div>
-  </section>
-  
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script type="text/javascript" src="https://stackpath.amazonaws.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  
-  <script>
+</section>
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://stackpath.amazonaws.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<script>
     $(document).ready(function() {
         $('#carouselExampleIndicators{{ $carouselId }}').carousel({
             interval: false
         });
     });
-  </script>
-  
-  <style>
+</script>
+
+<style>
     .carousel-title {
         color: #ffffff; /* Changez cette valeur pour la couleur souhaitée */
     }
@@ -67,5 +67,4 @@
         font-size: 0.8rem;
         margin-right: 2px;
     }
-  </style>
-  
+</style>

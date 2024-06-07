@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Mon espace') }}</div>
 
@@ -22,11 +22,9 @@
 
     @if (Auth::user()->role == 'user' || Auth::user()->role == 'contributor')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">
-                    {{ __('Demande de promotion de rôle') }}
-                </div>
+                <div class="card-header">{{ __('Demande de promotion de rôle') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('role.request') }}">
                         @csrf
@@ -61,7 +59,7 @@
 
     <!-- New Favorite Films Section -->
     <div class="row justify-content-center mt-4">
-        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#favoriteFilms" role="button" aria-expanded="false" aria-controls="favoriteFilms">
@@ -70,7 +68,7 @@
                 </div>
                 <div class="collapse" id="favoriteFilms">
                     <div class="card-body">
-                        @include('partials._carousel', ['carouselId' => 9, 'carouselTitle' => 'Mes films favoris', 'films' => $favoriteFilms])
+                        @include('partials._carousel', ['carouselId' => 9, 'carouselTitle' => 'Mes films favoris', 'films' => $favoriteFilms, 'isLibrary' => true])
                     </div>
                 </div>
             </div>
@@ -79,7 +77,7 @@
 
     @if (Auth::user()->role == 'contributor' || Auth::user()->role == 'admin')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#addFilmForm" role="button" aria-expanded="false" aria-controls="addFilmForm">
@@ -90,21 +88,18 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('films.store') }}" enctype="multipart/form-data" id="filmForm">
                             @csrf
-
                             <div class="row mb-3">
                                 <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Titre') }}</label>
                                 <div class="col-md-6">
                                     <input id="title" type="text" class="form-control" name="title" required>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Synopsis') }}</label>
                                 <div class="col-md-6">
                                     <textarea id="description" class="form-control" name="description" required maxlength="1000"></textarea>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="tags" class="col-md-4 col-form-label text-md-end">{{ __('Tags') }}</label>
                                 <div class="col-md-6">
@@ -120,7 +115,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="director" class="col-md-4 col-form-label text-md-end">{{ __('Réalisateur') }}</label>
                                 <div class="col-md-6">
@@ -131,42 +125,36 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="new-director" class="col-md-4 col-form-label text-md-end">{{ __('Ajouter un nouveau réalisateur ?')}}<br>{{ __('Coming soon')}}</label>
                                 <div class="col-md-6">
                                     <input id="new-director" type="text" class="form-control" name="new_director" oninput="toggleDirectorSelect()">
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="length" class="col-md-4 col-form-label text-md-end">{{ __('Durée (HHhMM)') }}</label>
                                 <div class="col-md-6">
                                     <input id="length" type="text" class="form-control" name="length" required pattern="\d{2}h\d{2}" placeholder="HHhMM">
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="year" class="col-md-4 col-form-label text-md-end">{{ __('Année de sortie') }}</label>
                                 <div class="col-md-6">
                                     <input id="year" type="number" class="form-control" name="year" required min="1800" max="{{ date('Y') }}">
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="thumbnail" class="col-md-4 col-form-label text-md-end">{{ __('Affiche promotionnelle') }}</label>
                                 <div class="col-md-6">
                                     <input id="thumbnail" type="file" class="form-control" name="thumbnail" required>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="video_url" class="col-md-4 col-form-label text-md-end">{{ __('Film video (mp4, webm...)') }}</label>
                                 <div class="col-md-6">
                                     <input id="video_url" type="file" class="form-control" name="video_url" required>
                                 </div>
                             </div>
-                      
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary btn-outline-dark border-0 rounded-0 auto-hover">
@@ -175,7 +163,6 @@
                                 </div>
                             </div>
                         </form>
-                        
                         <div class="progress mt-3">
                             <div class="progress-bar" id="uploadProgressBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                         </div>
@@ -188,7 +175,7 @@
 
     @if (Auth::user()->role == 'admin')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-10"> <!-- Changed from col-md-8 to col-md-10 to make it larger -->
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#roleRequests" role="button" aria-expanded="false" aria-controls="roleRequests">
@@ -352,45 +339,37 @@
 </div>
 
 <script>
+    document.getElementById('filmForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
+        let formData = new FormData(this);
+        let xhr = new XMLHttpRequest();
 
+        xhr.open('POST', '{{ route('films.store') }}', true);
 
-document.getElementById('filmForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+        // Update progress bar
+        xhr.upload.addEventListener('progress', function(event) {
+            if (event.lengthComputable) {
+                let percentComplete = (event.loaded / event.total) * 100;
+                let progressBar = document.getElementById('uploadProgressBar');
+                progressBar.style.width = percentComplete + '%';
+                progressBar.setAttribute('aria-valuenow', percentComplete);
+                progressBar.textContent = percentComplete.toFixed(2) + '%';
+            }
+        });
 
-    let formData = new FormData(this);
-    let xhr = new XMLHttpRequest();
+        // Handle completion
+        xhr.onload = function() {
+            if (xhr.status == 200) {
+                alert('Nous avons bien reçu vos documents !');
+                window.location.reload(); // Reload the page to reflect the new submission
+            } else {
+                alert("Erreur avec l'ajout des documents");
+            }
+        };
 
-    xhr.open('POST', '{{ route('films.store') }}', true);
-
-    // Update progress bar
-    xhr.upload.addEventListener('progress', function(event) {
-        if (event.lengthComputable) {
-            let percentComplete = (event.loaded / event.total) * 100;
-            let progressBar = document.getElementById('uploadProgressBar');
-            progressBar.style.width = percentComplete + '%';
-            progressBar.setAttribute('aria-valuenow', percentComplete);
-            progressBar.textContent = percentComplete.toFixed(2) + '%';
-        }
+        xhr.send(formData);
     });
-
-    // Handle completion
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            alert('Nous avons bien reçu vos documents !');
-            window.location.reload(); // Reload the page to reflect the new submission
-        } else {
-            alert("Erreur avec l'ajout des documents");
-        }
-    };
-
-    xhr.send(formData);
-});
-
-
-
-
-
 
     function toggleDirectorSelect() {
         var newDirectorInput = document.getElementById('new-director');
@@ -453,4 +432,4 @@ document.getElementById('filmForm').addEventListener('submit', function(event) {
     }
 </style>
 
-@endsection             
+@endsection

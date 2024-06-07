@@ -35,13 +35,6 @@
                         </div>
                     </div>
                 </div>
-                @if (Auth::check() && Auth::user()->role == 'admin')
-                <form id="deleteFilmForm" action="{{ route('film.destroy', $film->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?')">Supprimer le film</button>
-                </form>
-                @endif
 
                 <!-- Comment Section -->
                 <div class="mt-5">
@@ -66,6 +59,13 @@
                 </div>
             </div>
             <div class="col-md-4">
+                @if (Auth::check() && Auth::user()->role == 'admin')
+                <form id="deleteFilmForm" action="{{ route('film.destroy', $film->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?')">Supprimer le film</button>
+                </form>
+                @endif
                 <h2 class="film-title">{{ $film->title }}</h2>
                 <img src="{{ asset($film->thumbnail) }}" alt="{{ $film->title }}" class="film-thumbnail">
                 <p class="film-description">{{ $film->description }}</p>
