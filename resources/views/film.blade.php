@@ -39,23 +39,25 @@
                 <!-- Comment Section -->
                 <div class="mt-5">
                     <h4 style="color: #fffbe8;">Commentaires</h4>
-                    @auth
-                    <form action="{{ route('comments.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="media_id" value="{{ $film->id }}">
-                        <div class="form-group">
-                            <textarea name="content" class="form-control" rows="3" placeholder="Ajoutez un commentaire..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Commenter</button>
-                    </form>
-                    @endauth
-                    @if($film->comments->isNotEmpty())
-                        @foreach($film->comments as $comment)
-                            @include('partials.comment', ['comment' => $comment])
-                        @endforeach
+                    @guest
+                        <p style="color: #c58686; font-weight: bold;">Connectez vous ou confirmez votre email pour accéder aux commentaires.</p>
                     @else
-                        <p style="color: #fffbe8;">Aucun commentaire pour l'instant.</p>
-                    @endif
+                        <form action="{{ route('comments.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="media_id" value="{{ $film->id }}">
+                            <div class="form-group">
+                                <textarea name="content" class="form-control" rows="3" placeholder="Ajoutez un commentaire..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Commenter</button>
+                        </form>
+                        @if($film->comments->isNotEmpty())
+                            @foreach($film->comments as $comment)
+                                @include('partials.comment', ['comment' => $comment])
+                            @endforeach
+                        @else
+                            <p style="color: #fffbe8;">Aucun commentaire pour l'instant.</p>
+                        @endif
+                    @endguest
                 </div>
             </div>
             <div class="col-md-4">

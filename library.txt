@@ -3,7 +3,7 @@ tag obligatoires : aussi j'ai remarqué une autre chose un utilisateur avec le b
 
 - faire en sorte de bloquer l'inscription si le pseudo ou le mail existe deja
 
-- changer le bouton profil pour pseudo - profil
+- faire en sorte que le reset password fonctionne
 
 
 

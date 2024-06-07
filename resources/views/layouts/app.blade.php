@@ -169,9 +169,13 @@
                         </ul>
                     </div>
                 </div>
+                @if (Route::has('login'))
+                @auth
                 <li class="nav-item">
                     <span class="navbar-text">Connecté en tant que {{ Auth::user()->name }}</span>
                 </li>
+                @endauth
+                @endif
             </nav>
         </header>
 
