@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
-    public function show($slug)
-    {
-        $film = Media::with(['comments' => function ($query) {
-            $query->whereNull('parent_id')->with('replies');
-        }])->where('slug', $slug)->firstOrFail();
-        
-        return view('film', compact('film'));
-    }
+// FilmController.php
+public function show($slug)
+{
+    $film = Media::where('slug', $slug)
+        ->with(['comments' => function($query) {
+            $query->with('children');
+        }])
+        ->firstOrFail();
+    
+    return view('film', compact('film'));
+}
+
     
     
     

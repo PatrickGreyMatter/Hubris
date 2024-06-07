@@ -1,15 +1,9 @@
 tag obligatoires : aussi j'ai remarqué une autre chose un utilisateur avec le bon rôle peut cliquer sur proposer un film même s'il n'a pas mis de tags, mais il ne reçoit pas d'erreur, il est just renvoyer a la page profil et rien ne se passe, il faudrait mettre une alerte en place ou rendre le remplissage d'au moins un tag obligatoire
 
 
-- autoriser tout les types de fichiers images, videos aussi
-- ajouter un semblant d'ux pour le processus de téléchargement
+- faire en sorte de bloquer l'inscription si le pseudo ou le mail existe deja
 
-
-- faire l'espace commentaire 
-
-- ajouter une fonction supprimer le film (peut etre modifier aussi) pour les admins sur les pages films
-
-- fix le footer dans la page profil et ajouter les modals
+- changer le bouton profil pour pseudo - profil
 
 
 

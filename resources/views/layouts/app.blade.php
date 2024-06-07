@@ -96,7 +96,7 @@
         }
 
         footer {
-            background-color: #343a40;
+            background-color: #41566b;
             color: white;
             padding: 0.09rem 0;
         }

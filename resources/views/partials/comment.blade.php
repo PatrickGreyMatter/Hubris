@@ -1,33 +1,58 @@
-<!-- resources/views/partials/comment.blade.php -->
-<div class="card mt-3">
+<div class="card mb-3" style="background-color: transparent; border: none; color: #fffbe8;">
     <div class="card-body">
-        <div id="edit-comment-{{ $comment->id }}" style="display: none;">
-            <form action="{{ route('comments.update', $comment->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <textarea name="content" class="form-control" rows="3">{{ $comment->content }}</textarea>
+        <div class="d-flex justify-content-between">
+            <div>
+                @php
+                    $user = Auth::user();
+                    $commentUser = $comment->user;
+                    $name = $user && $user->id == $commentUser->id ? 'Vous' : $commentUser->name;
+                @endphp
+                <strong>{{ $name }} :</strong>
+                <div id="edit-comment-{{ $comment->id }}" style="display: none;">
+                    <form action="{{ route('comments.update', $comment->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <textarea name="content" class="form-control" rows="3">{{ $comment->content }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-            </form>
+                <div id="comment-content-{{ $comment->id }}">{{ $comment->content }}</div>
+            </div>
+            @if(Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role == 'admin'))
+            <div>
+                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary text-danger font-weight-bold">Supprimer</button>
+                </form>
+            </div>
+            @endif
         </div>
 
-        <div id="comment-content-{{ $comment->id }}">{{ $comment->content }}</div>
-
         @auth
-        <form action="{{ route('comments.store') }}" method="POST" class="reply-section mt-2">
-            @csrf
-            <input type="hidden" name="media_id" value="{{ $film->id }}">
-            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-            <div class="form-group">
-                <textarea name="content" class="form-control" rows="2" placeholder="Répondre..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-secondary btn-sm">Répondre</button>
-        </form>
+        <div class="reply-section mt-2" id="reply-section-{{ $comment->id }}" style="display: none;">
+            <form action="{{ route('comments.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="media_id" value="{{ $film->id }}">
+                <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                <div class="form-group">
+                    <textarea name="content" class="form-control" rows="2" placeholder="Ajouter une réponse..."></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="reply-button-container">
+            <button class="btn btn-secondary" id="reply-button-{{ $comment->id }}" onclick="toggleReplySection({{ $comment->id }})">Répondre</button>
+        </div>
         @endauth
 
-        @foreach($comment->replies as $childComment)
-            @include('partials.comment', ['comment' => $childComment])
-        @endforeach
+        @if($comment->children && $comment->children->isNotEmpty())
+            <div class="ml-4">
+                @foreach($comment->children as $childComment)
+                    @include('partials.comment', ['comment' => $childComment])
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>

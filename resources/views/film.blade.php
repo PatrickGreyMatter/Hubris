@@ -1,4 +1,3 @@
-<!-- resources/views/film.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -46,7 +45,7 @@
 
                 <!-- Comment Section -->
                 <div class="mt-5">
-                    <h4>Commentaires</h4>
+                    <h4 style="color: #fffbe8;">Commentaires</h4>
                     @auth
                     <form action="{{ route('comments.store') }}" method="POST">
                         @csrf
@@ -62,7 +61,7 @@
                             @include('partials.comment', ['comment' => $comment])
                         @endforeach
                     @else
-                        <p>Aucun commentaire pour l'instant.</p>
+                        <p style="color: #fffbe8;">Aucun commentaire pour l'instant.</p>
                     @endif
                 </div>
             </div>
@@ -127,7 +126,34 @@
         })
         .catch(error => console.error('Error:', error));
     }
+
+    function toggleReplySection(commentId) {
+        var replySection = document.getElementById('reply-section-' + commentId);
+        var replyButton = document.getElementById('reply-button-' + commentId);
+
+        if (replySection.style.display === 'none') {
+            replySection.style.display = 'block';
+            replyButton.textContent = 'Envoyer la réponse';
+        } else {
+            var form = replySection.querySelector('form');
+            form.submit();
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        var isClickInsideReplyButton = event.target.closest('.btn.btn-secondary');
+        var isClickInsideReplySection = event.target.closest('.reply-section');
+        if (!isClickInsideReplyButton && !isClickInsideReplySection) {
+            document.querySelectorAll('.reply-section').forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.querySelectorAll('.btn-secondary').forEach(function(button) {
+                button.textContent = 'Répondre';
+            });
+        }
+    });
 </script>
+
 
 <style>
     .rating-section {
@@ -136,6 +162,7 @@
         font-size: 1.2rem;
         color: #fffbe8;
         margin-top: 15px;
+        margin-bottom: 20px; /* Added margin-bottom for spacing */
     }
 
     .rating-checkboxes {
@@ -178,29 +205,82 @@
     }
 
     .video-player {
-      width: 100%;
-      max-width: 800px;
-      margin-bottom: 20px;
-      margin-top: 100px;
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 20px;
+        margin-top: 100px;
     }
 
     .film-title {
-      color: #fffbe8;
-      font-size: 2rem;
-      margin-bottom: 50px;
-      margin-top: 50px;
+        color: #fffbe8;
+        font-size: 2rem;
+        margin-bottom: 50px;
+        margin-top: 50px;
     }
 
     .film-thumbnail {
-      width: 100%;
-      height: auto;
-      margin-bottom: 20px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
     }
 
     .film-description, .film-info {
-      color: #fff7d1;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
+        color: #fff7d1;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
     }
+
+    .card {
+        background-color: transparent;
+        border: none;
+        color: #fffbe8;
+    }
+
+    .btn-secondary, .btn-primary {
+        color: #fffbe8;
+        background-color: transparent;
+        border: 1px solid #fffbe8;
+        padding: 5px 10px;
+        font-size: 1rem;
+    }
+
+    .btn-secondary:hover, .btn-primary:hover {
+        background-color: #fffbe8;
+        color: #333;
+    }
+
+    textarea.form-control {
+        background-color: transparent;
+        color: #fffbe8;
+        border: 1px solid #fffbe8;
+    }
+
+    textarea.form-control::placeholder {
+        color: #fffbe8;
+    }
+
+    /* New styles for comment section */
+    h4 {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .card-body {
+        font-size: 1.2rem;
+    }
+
+    .reply-button-container {
+        margin-top: 10px; /* Added margin-top for spacing */
+    }
+
+    .text-danger.font-weight-bold {
+        color: red;
+        font-weight: bold;
+    }
+
+    .d-flex.justify-content-between > div:last-child {
+        margin-left: auto;
+    }
+
 </style>
 @endsection
