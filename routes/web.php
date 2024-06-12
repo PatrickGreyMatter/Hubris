@@ -8,11 +8,15 @@ use App\Http\Controllers\RoleRequestController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilmSubmissionManagementController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\NotesAndFavoritesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Http\Request;
 
 Route::middleware(['web'])->group(function () {
@@ -35,6 +39,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
+    Route::put('/profile/update', [ProfilController::class, 'updateProfile'])->name('profile.update');
+
+    // Password reset routes
+    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+    Route::get('/watch-profil/{id}', [ProfilController::class, 'watch'])->name('watch-profil');
+
+
+
 });
 
 Route::middleware(['auth', 'admin', 'verified'])->group(function () {
@@ -42,6 +60,8 @@ Route::middleware(['auth', 'admin', 'verified'])->group(function () {
     Route::put('/films-approve/{id}', [FilmSubmissionManagementController::class, 'approve'])->name('films.approve');
     Route::put('/films/{id}/update', [FilmSubmissionManagementController::class, 'update'])->name('films.update');
     Route::delete('/film/{id}', [FilmController::class, 'destroy'])->name('film.destroy');
+    Route::delete('/user/{id}/ban', [UserController::class, 'ban'])->name('user.ban');
+
 });
 
 Route::middleware(['auth', 'contributor', 'verified'])->group(function () {

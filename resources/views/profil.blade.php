@@ -6,7 +6,6 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Mon espace') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success outline-black" role="alert">
@@ -20,10 +19,78 @@
         </div>
     </div>
 
-    @if (Auth::user()->role == 'user' || Auth::user()->role == 'contributor')
     <div class="row justify-content-center mt-4">
-        <div class="col-md-10">
+        <!-- Profile Information Section -->
+        <div class="col-md-4">
             <div class="card">
+                <div class="card-header">{{ __('Informations de profil') }}</div>
+                <div class="card-body text-center">
+                    @if (Auth::user()->profile_picture)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle mb-3" style="max-width: 150px;">
+                    @else
+                        <img src="{{ asset('images/default-profile.jpg') }}" alt="Default Profile Picture" class="rounded-circle mb-3" style="max-width: 150px;">
+                    @endif
+                    <h4>{{ Auth::user()->name }}</h4>
+                    <p>{{ Auth::user()->public_description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collapsible Forms Section -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#profileUpdate" role="button" aria-expanded="false" aria-controls="profileUpdate">
+                        {{ __('Mettre à jour le profil') }}
+                    </a>
+                </div>
+                <div class="collapse" id="profileUpdate">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom') }}</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="profile_picture" class="col-md-4 col-form-label text-md-end">{{ __('Photo de profil') }}</label>
+                                <div class="col-md-6">
+                                    <input id="profile_picture" type="file" class="form-control" name="profile_picture">
+                                    @if (Auth::user()->profile_picture)
+                                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="mt-2" style="max-width: 150px;">
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="public_description" class="col-md-4 col-form-label text-md-end">{{ __('Description publique') }}</label>
+                                <div class="col-md-6">
+                                    <textarea id="public_description" class="form-control" name="public_description">{{ Auth::user()->public_description }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-8 offset-md-4 d-flex justify-content-between align-items-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Mettre à jour') }}
+                                    </button>
+                                    <a href="{{ route('password.request') }}" class="btn btn-outline-dark border-0 rounded-0 ml-2">
+                                        {{ __('Changer le mot de passe') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            @if (Auth::user()->role == 'user' || Auth::user()->role == 'contributor')
+            <div class="card mt-4">
                 <div class="card-header">{{ __('Demande de promotion de rôle') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('role.request') }}">
@@ -53,14 +120,10 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    @endif
+            @endif
 
-    <!-- New Favorite Films Section -->
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-10">
-            <div class="card">
+            <!-- New Favorite Films Section -->
+            <div class="card mt-4">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#favoriteFilms" role="button" aria-expanded="false" aria-controls="favoriteFilms">
                         {{ __('Bibliothèque') }}
@@ -72,13 +135,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    @if (Auth::user()->role == 'contributor' || Auth::user()->role == 'admin')
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-10">
-            <div class="card">
+            @if (Auth::user()->role == 'contributor' || Auth::user()->role == 'admin')
+            <div class="card mt-4">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#addFilmForm" role="button" aria-expanded="false" aria-controls="addFilmForm">
                         {{ __('Proposez nous un film !') }}
@@ -169,14 +228,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    @endif
+            @endif
 
-    @if (Auth::user()->role == 'admin')
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-10">
-            <div class="card">
+            @if (Auth::user()->role == 'admin')
+            <div class="card mt-4">
                 <div class="card-header">
                     <a class="btn btn-outline-dark border-0 rounded-0" data-toggle="collapse" href="#roleRequests" role="button" aria-expanded="false" aria-controls="roleRequests">
                         {{ __('Demandes de changement de rôle') }}
@@ -332,10 +387,9 @@
                     </div>
                 </div>
             </div>
+        @endif
         </div>
     </div>
-@endif
-
 </div>
 
 <script>
@@ -429,6 +483,10 @@
 
     .card-header {
         font-size: 1.25rem;
+    }
+
+    .auto-hover:hover {
+        background-color: #f0f0f0;
     }
 </style>
 

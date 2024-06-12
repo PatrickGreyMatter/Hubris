@@ -6,8 +6,9 @@
                     $user = Auth::user();
                     $commentUser = $comment->user;
                     $name = $user && $user->id == $commentUser->id ? 'Vous' : $commentUser->name;
+                    $profileRoute = $user && $user->id == $commentUser->id ? route('profil') : route('watch-profil', $commentUser->id);
                 @endphp
-                <strong>{{ $name }} :</strong>
+                <strong><a href="{{ $profileRoute }}" style="color: #fffbe8;">{{ $name }}</a> :</strong>
                 <div id="edit-comment-{{ $comment->id }}" style="display: none;">
                     <form action="{{ route('comments.update', $comment->id) }}" method="POST">
                         @csrf
