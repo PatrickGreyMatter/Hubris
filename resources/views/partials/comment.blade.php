@@ -7,8 +7,12 @@
                     $commentUser = $comment->user;
                     $name = $user && $user->id == $commentUser->id ? 'Vous' : $commentUser->name;
                     $profileRoute = $user && $user->id == $commentUser->id ? route('profil') : route('watch-profil', $commentUser->id);
+                    $profilePicture = $commentUser->profile_picture ? asset('storage/' . $commentUser->profile_picture) : asset('images/default-profile.jpg');
                 @endphp
-                <strong><a href="{{ $profileRoute }}" style="color: #fffbe8;">{{ $name }}</a> :</strong>
+                <div class="d-flex align-items-center">
+                    <img src="{{ $profilePicture }}" alt="Profile Picture" class="rounded-circle mr-2" style="width: 30px; height: 30px;">
+                    <strong><a href="{{ $profileRoute }}" style="color: #fffbe8;">{{ $name }}</a> :</strong>
+                </div>
                 <div id="edit-comment-{{ $comment->id }}" style="display: none;">
                     <form action="{{ route('comments.update', $comment->id) }}" method="POST">
                         @csrf
